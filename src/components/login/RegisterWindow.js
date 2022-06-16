@@ -6,14 +6,14 @@ export function RegisterWindow({ setNewUser }) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState('');
-    const { logIn } = useUserAuth();
+    const { signIn } = useUserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         if (password.length > 7) {
             try {
-                await logIn(email, password);
+                await signIn(email, password);
             } catch (err) {
                 console.log(err);
                 setError(err.message);

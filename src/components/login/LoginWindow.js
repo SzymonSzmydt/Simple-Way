@@ -7,14 +7,14 @@ export function LoginWindow({ setNewUser }) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState('');
-    const { singUp } = useUserAuth();
+    const { logIn, googleSignIn } = useUserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
 
         try {
-            await  singUp(email, password);
+            await  logIn(email, password);
         } catch (err) {
             console.log(err);
             setError(err.message);
@@ -23,6 +23,15 @@ export function LoginWindow({ setNewUser }) {
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     const handleRegisterClick = () => setNewUser(true);
+    const handleGoogleSignIn = async (e) => {
+        e.preventDefault();
+
+        try {
+            await googleSignIn();
+        } catch (err) {
+            setError(err.message)
+        }
+    }
 
     return (
         <div className="login-window" >
@@ -34,7 +43,7 @@ export function LoginWindow({ setNewUser }) {
                 <input type="password" onChange={ e => setPassword(e.target.value)} autoComplete="current-password" />
                 <button className="btn btn-login" > Zaloguj </button>
             </form>
-            <GoogleButton className="btn"  />
+            <GoogleButton className="btn" onClick={handleGoogleSignIn} />
 
             <div className="login-footer">
                 Nie masz konta ?
