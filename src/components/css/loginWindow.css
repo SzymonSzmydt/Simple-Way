@@ -1,12 +1,10 @@
-.isLogged {
+.login-window {
     display: flex;
     align-items: center;
     flex-direction: column;
 
     width: 30rem;
-    height: 20rem;
-
-    margin: 20rem auto;
+    margin: 10rem auto;
 
     color: var(--color-primary);
     font-size: 1rem;
@@ -15,7 +13,7 @@
     border-radius: var(--radius);
 }
 
-.form-title {
+.login-title {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +21,7 @@
     width: 100%;
     height: 2rem;
 
-    font-weight: bold;
+    font-weight: 500;
     color: var(--color-white);
 
     background-color: var(--color-secondary);
@@ -33,6 +31,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+
     padding: 1rem;
 }
 
@@ -41,10 +40,10 @@
 }
 
 .form > input {
-    outline: none;
+    outline: var(--color-white);
     appearance: none;
 
-    width: 10rem;
+    width: 15rem;
     height: 2rem;
 
     margin-bottom: 1rem;
@@ -55,40 +54,39 @@
 
     border: none;
     border-bottom: 1px solid var(--color-primary);
+    background: transparent;
 }
 
 .form > input:focus {
-    border-bottom: 2px solid var(--color-green);
+    border-bottom: 1px solid var(--color-green);
+    background: transparent;
 }
 
-.btn {
+.btn-login {
     cursor: pointer;
 
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
+    margin: 0.5rem 0;
 
-    font-family: Roboto, sans-serif;
-    font-weight: bold;
+    font-weight: 500;
     color: var(--color-white);
 
     background-color: var(--color-primary);
     border: 0;
-    border-radius: var(--radius);
 }
 
 .btn:hover {
     background-color: var(--color-green);
 }
 
-.form-footer {
-    margin-top: 1rem;
+.login-footer {
+    margin: 1.5rem;
 }
 
 .link {
     cursor: pointer;
-
+    color: var(--color-secondary);
     font-weight: 500;
-    text-decoration: underline;
 }
 
 .link:hover {
