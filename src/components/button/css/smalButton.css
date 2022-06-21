@@ -1,0 +1,16 @@
+.smallButton {
+    cursor: pointer;
+
+    padding: 1rem 1rem 0;
+    margin: 0 1rem 1rem;
+
+    color: var(--color-primary);
+
+    border: 0;
+    border-bottom: 1px solid var(--color-primary);
+    background-color: transparent;
+}
+
+.smallButton:hover {
+    box-shadow: 0px 1px 0px var(--color-primary);
+}

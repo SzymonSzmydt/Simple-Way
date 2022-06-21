@@ -1,9 +1,13 @@
+import "./css/loginWindow.css";
 import {useState} from "react";
 import GoogleButton from 'react-google-button';
-import "../css/loginWindow.css";
-import {useUserAuth} from "../context/UserAuthContext";
+import {useUserAuth} from "../../context/UserAuthContext";
+import {useNavigate, Link} from 'react-router-dom';
+import {BigButton} from "../button/BigButton";
 
-export function LoginWindow({ setNewUser }) {
+export function LoginWindow() {
+    const navigate = useNavigate();
+
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ error, setError ] = useState('');
@@ -15,23 +19,27 @@ export function LoginWindow({ setNewUser }) {
 
         try {
             await  logIn(email, password);
+            navigate("/application", { replace: true });
         } catch (err) {
             console.log(err);
             setError(err.message);
         }
     }
-    const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
-    const handleRegisterClick = () => setNewUser(true);
     const handleGoogleSignIn = async (e) => {
         e.preventDefault();
+        setError('');
 
         try {
             await googleSignIn();
+            navigate("/application", { replace: true });
         } catch (err) {
+            console.log(err);
             setError(err.message)
         }
     }
+
+    const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     return (
         <div className="login-window" >
@@ -41,15 +49,14 @@ export function LoginWindow({ setNewUser }) {
                 <input type="email" onChange={ e => setEmail(e.target.value)} autoComplete="email" />
                 <label htmlFor="password"> Hasło </label>
                 <input type="password" onChange={ e => setPassword(e.target.value)} autoComplete="current-password" />
-                <button className="btn btn-login" > Zaloguj </button>
+                <BigButton type={"Submit"} name={"Zaloguj się"} />
             </form>
+            <div className="line" />
             <GoogleButton className="btn" onClick={handleGoogleSignIn} />
 
             <div className="login-footer">
                 Nie masz konta ?
-                <span className="link" onClick={handleRegisterClick}>
-                    &nbsp; Zarejsestruj się!
-                </span>
+                <Link to="/register"> Zarejestruj się! </Link>
             </div>
         </div>
     )

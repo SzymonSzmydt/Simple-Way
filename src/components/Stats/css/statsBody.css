@@ -1,0 +1,13 @@
+.statsBody {
+    margin-left: 1rem;
+
+    color: var(--color-primary);
+}
+
+.suma {
+    padding: 1rem 1rem;
+}
+
+.rest {
+    padding: 0 1rem 1rem;
+}

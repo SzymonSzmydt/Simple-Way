@@ -1,4 +1,4 @@
-import "../css/header.css"
+import "./css/header.css"
 import {UserName} from "./UserName";
 
 export const Header = () => {

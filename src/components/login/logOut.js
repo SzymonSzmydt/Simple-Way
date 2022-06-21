@@ -1,16 +1,25 @@
-import {useUserAuth} from "../context/UserAuthContext";
-import "../css/logOut.css";
+import {useUserAuth} from "../../context/UserAuthContext";
+import {useNavigate} from 'react-router-dom';
+import "./css/logOut.css";
 
 export const LogOutButton = () => {
+    const navigate = useNavigate();
     const { user, logOut } = useUserAuth();
 
     const handleLogOut = async () => {
         try {
-
+            await logOut();
+            navigate("/", { replace: true });
         } catch (err) {
-            console.log(err);
+            console.log(err.message);
         }
     }
 
-    return <span className="material-symbols-outlined logout"> logout </span>
+    return (
+        <>
+            <span className="material-symbols-outlined logout" onClick={handleLogOut}> logout </span>
+            { user.email }
+        </>
+
+    )
 }

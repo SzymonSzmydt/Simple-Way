@@ -1,0 +1,27 @@
+.window__lists {
+    padding: 0 1rem;
+}
+
+.single-list {
+    cursor: pointer;
+    padding: 0.5rem;
+
+    color: var(--color-primary);
+}
+
+.single-list:hover {
+    color: var(--color-third);
+    box-shadow: inset 1px 1px 1px 1px var(--color-primary);
+}
+
+.single-clicked {
+    cursor: pointer;
+    padding: 0.5rem;
+
+    color: var(--color-third);
+    box-shadow: inset 1px 1px 1px 1px var(--color-primary);
+}
+
+.single-list:nth-child(odd) {
+    background-color: var(--color-white);
+}

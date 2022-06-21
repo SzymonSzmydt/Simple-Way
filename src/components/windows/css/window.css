@@ -1,0 +1,8 @@
+.window {
+    padding: 1rem;
+}
+
+.window-row {
+    display: flex;
+    justify-content: center;
+}

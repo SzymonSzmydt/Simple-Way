@@ -1,0 +1,37 @@
+.listOfCompaniesBox {
+    max-width: 62.25rem;
+    margin: 1rem auto;
+
+    color: var(--color-primary);
+    font-size: 1rem;
+
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius);
+}
+
+.table {
+    display: flex;
+}
+
+tr {
+    border: 1px solid var(--color-white);
+}
+
+thead {
+    background-color: var(--color-third);
+    border-radius: var(--radius);
+
+    color: var(--color-secondary)
+}
+
+.column0 {
+    width: 2rem;
+}
+
+.column1 {
+    width: 30rem;
+}
+
+.column2 {
+    width: 8rem;
+}
