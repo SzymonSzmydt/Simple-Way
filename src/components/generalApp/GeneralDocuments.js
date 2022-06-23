@@ -13,8 +13,6 @@ export const GeneralDocuments = ({ thatMonth }) => {
 
     if (thatMonth === undefined) thatMonth = test;
 
-    console.log(thatMonth);
-
     return (
         <WindowContainer>
             <table className="table">

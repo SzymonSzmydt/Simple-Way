@@ -2,10 +2,10 @@
 export function GeneralInformation({ month }) {
 
     return (
-        <table style={{width: "20rem"}}>
+        <table style={{width: "20rem", height: "6.3rem"}}>
             <tbody>
-            <tr className="text-list">
-                <td> <b> Miesiąc </b> </td>
+            <tr className="text-list" >
+                <td style={{width: "10rem"}}> <b> Miesiąc </b> </td>
                 <td className="text__align-right"> { month } </td>
             </tr>
             <tr className="text-list">

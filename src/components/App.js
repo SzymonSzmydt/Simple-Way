@@ -8,6 +8,7 @@ import {AddSeller} from "./seller/AddSeller";
 import {General} from "./generalApp/General";
 import {Routes, Route, Link} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
+import {New} from "./generalApp/New";
 
 export function App() {
 

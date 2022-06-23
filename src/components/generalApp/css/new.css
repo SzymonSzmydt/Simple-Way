@@ -1,0 +1,32 @@
+.new {
+    display: flex;
+    justify-content: center;
+
+    width: 46.75rem;
+    margin-bottom: -1rem;
+}
+
+.new__label {
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+
+    padding: 1rem 0;
+}
+
+.new__label input {
+    color: var(--color-accent);
+}
+
+.new__label > input:nth-child(1) {
+    width: 4rem;
+}
+
+#name {
+    width: 25rem;
+}
+
+.bottom-margin {
+    margin-bottom: -1rem;
+}

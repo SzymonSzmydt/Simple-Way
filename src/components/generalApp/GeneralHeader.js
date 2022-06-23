@@ -1,34 +1,15 @@
-import {useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {WindowContainer} from "../windows/WindowContainer";
 import {SmallTitleWindow} from "../windows/SmallTitleWindow";
-import {EditIcon} from "../button/EditIcon";
-import {MonthSelect} from "./MonthSelect";
 import {GeneralInformation} from "./GeneralInformation";
-import {ButtonPanel} from "../button/ButtonPanel";
+import {HeaderTopSection} from "./HeaderTopSection";
 
-
-export function GeneralHeader({ myUser }) {
-    const navigation = useNavigate();
-    const handleBack = () => navigation("/application", true);
-
+export function GeneralHeader({ myUser, setAddProductButton }) {
     const [ choiceMonth, setChoiceMonth ] = useState('');
 
     return (
         <WindowContainer>
-            <div>
-                <div>
-                    <SmallTitleWindow windowTitle={"Sprzedawca"} >
-                        {myUser.data.username} {myUser.data.surname}
-                        <EditIcon onClick={handleBack} />
-                    </SmallTitleWindow>
-                    <SmallTitleWindow windowTitle={"Miesiąc"} >
-                        <MonthSelect setChoiceMonth={setChoiceMonth} />
-                    </SmallTitleWindow>
-                </div>
-                    <ButtonPanel />
-            </div>
-
+            <HeaderTopSection myUser={myUser} setChoiceMonth={setChoiceMonth} setAddProductButton={setAddProductButton}/>
             <SmallTitleWindow windowTitle={"Przydatne informacje"} >
                 <GeneralInformation month={choiceMonth} />
             </SmallTitleWindow>
