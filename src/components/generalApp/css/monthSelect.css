@@ -1,0 +1,10 @@
+.monthSelect {
+    margin-top: 1rem;
+    border: 1px solid var(--color-third);
+}
+
+.monthSelect > select {
+    width: 8rem;
+
+    color: var(--color-accent);
+}

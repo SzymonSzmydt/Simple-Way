@@ -1,0 +1,9 @@
+.buttonPanel {
+    display: flex;
+    justify-content: center;
+
+    margin: 1rem 1rem 0;
+
+    border: 2px solid var(--color-third);
+    border-radius: var(--radius);
+}

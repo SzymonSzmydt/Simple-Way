@@ -18,7 +18,7 @@ export function LoginWindow() {
         setError('');
 
         try {
-            await  logIn(email, password);
+            await logIn(email, password);
             navigate("/application", { replace: true });
         } catch (err) {
             console.log(err);

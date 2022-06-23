@@ -1,0 +1,10 @@
+.icons {
+    cursor: pointer;
+    font-size: 1.25rem;
+
+    padding: 0 1rem;
+}
+
+.icons:hover {
+    color: var(--color-green);
+}

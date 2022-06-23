@@ -7,7 +7,6 @@ import {Window} from "./windows/Window";
 
 export function MainApp() {
     const [ userData, setUserData ] = useState([]);             // props
-    const [ selectedUser, setSelectedUser ] = useState({});     // Data from firebase
 
     const { user } = useUserAuth();
 
@@ -19,12 +18,13 @@ export function MainApp() {
             }
 
          useEffect(() => {
-            uploadUserData();
-        }, []);
+            const menageData = () => uploadUserData();
+            return menageData;
+        }, [user]);
 
     return (
             <Window>
-                <MainCompany userData={userData} selectedUser={selectedUser} setSelectedUser={setSelectedUser} />
+                <MainCompany userData={userData} />
             </Window>
     )
 }

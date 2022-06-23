@@ -1,7 +1,7 @@
-import {SmallTitleWindow} from "./windows/SmallTitleWindow";
-
+import {SmallTitleWindow} from "./SmallTitleWindow";
 
 export function Information( {myUser} ) {
+    if (!myUser) return null;
 
     return (
         <SmallTitleWindow windowTitle={"Informacje o podmiocie"} style={{minWidth: "18rem"}}>
@@ -13,19 +13,19 @@ export function Information( {myUser} ) {
                         </tr>
                         <tr className="text-list">
                             <td> <b> Nazwisko </b> </td>
-                            <td> { myUser.surname } </td>
+                            <td> {  myUser.surname } </td>
                         </tr>
                         <tr className="text-list">
                             <td> <b> Ulica </b> </td>
-                            <td> { myUser.address } </td>
+                            <td> {  myUser.address } </td>
                         </tr>
                         <tr className="text-list">
                             <td> <b> Kod pocztowy </b> </td>
-                            <td> { myUser.postcode } </td>
+                            <td> {  myUser.postcode } </td>
                         </tr>
                         <tr className="text-list">
                             <td> <b> Miasto </b> </td>
-                            <td> { myUser.city } </td>
+                            <td> {  myUser.city } </td>
                         </tr>
                      </tbody>
                  </table>

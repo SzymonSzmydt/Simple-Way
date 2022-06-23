@@ -1,12 +1,25 @@
+@keyframes Opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 .window__body {
     display: inline-block;
-    height: min-content;
 
     padding-bottom: 1rem;
     margin: 0 1rem;
 
     border: 1px solid var(--color-third);
     border-radius: var(--radius);
+
+    animation-name: Opacity;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: inherit;
 }
 
 .window__body-title {
@@ -35,13 +48,15 @@
     margin-left: 2rem;
 }
 
-
-
 .text {
     font-size: 1rem;
     color: var(--color-secondary);
 
     padding: 1rem;
+}
+
+.text__align-right {
+    text-align: right;
 }
 
 .text-list {

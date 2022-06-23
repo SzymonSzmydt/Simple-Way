@@ -5,4 +5,6 @@
 .window-row {
     display: flex;
     justify-content: center;
+
+    background-color: #FFFFFF;
 }
