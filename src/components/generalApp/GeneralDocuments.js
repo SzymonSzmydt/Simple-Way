@@ -19,10 +19,11 @@ export const GeneralDocuments = ({ thatMonth }) => {
                 <thead className="thead">
                     <tr>
                         <td className="col col-lp"> Lp. </td>
-                        <td className="col col-nr"> Nr dok. </td>
-                        <td className="col col-name"> Nazwa </td>
-                        <td className="col col-summary"> Wartość</td>
                         <td className="col col-data"> Data </td>
+                        <td className="col col-summary"> Kwota sprzedaży</td>
+                        <td className="col col-total"> Kwota narastająca od początku roku </td>
+                        <td className="col col-suggestions"> Uwagi </td>
+
                     </tr>
                 </thead>
                 <tbody>

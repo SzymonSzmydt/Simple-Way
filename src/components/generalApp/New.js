@@ -4,8 +4,8 @@ import {useState} from "react";
 import {SmallButton} from "../button/SmallButton";
 import {WindowContainer} from "../windows/WindowContainer";
 
-export function New({ setAddProductButton }) {
-    const [ products, setProducts ] = useState({day: '',name: '', q: '', price: '', sum: ''});
+export function New({ setAddProductButton, setSellOfDay }) {
+    const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -15,38 +15,39 @@ export function New({ setAddProductButton }) {
         });
     }
 
+    const saveData = ()=> {
+        if (products.date.length === 10 && products.sum.length > 0) {
+            setSellOfDay(products);
+        }
+
+    }
+
     const cancel = () => {
-        setProducts({day: '',name: '', q: '', price: '', sum: ''});
+        setProducts({date: '', sum: '', info: ''});
         setAddProductButton(false);
     }
     return (
         <WindowContainer>
-            <SmallTitleWindow windowTitle={"Uzupełni pola dla produktu lub usługi"}>
+            <SmallTitleWindow windowTitle={"Sprzedaż w danym dniu"}>
                 <form className="new">
                     <label className="new__label">
-                        Dzień
-                        <input type="number" name="day" onChange={event => handleChange(event)} />
+                        Data
+                        <input type="date" name="date" onChange={event => handleChange(event)} />
                     </label>
                     <label className="new__label" >
-                        Nazwa
-                        <input id="name" type="text" name="name" onChange={event => handleChange(event)} />
+                        Kwota sprzedaży
+                        <input type="number" name="sum" onChange={event => handleChange(event)} />
                     </label>
                     <label className="new__label" >
-                        Ilość
-                        <input type="number" name="q" onChange={event => handleChange(event)} />
-                    </label>
-                    <label className="new__label" >
-                        Cena
-                        <input type="number" name="price" onChange={event => handleChange(event)} />
+                        Uwagi
+                        <input id="info" type="text" name="info" onChange={event => handleChange(event)} />
                     </label>
                 </form>
                 <div className="window-row bottom-margin">
-                    <SmallButton name={"Zapisz"} />
+                    <SmallButton name={"Zapisz"} onClick={ saveData }/>
                     <SmallButton name={"Anuluj"} onClick={ cancel }/>
                 </div>
-
             </SmallTitleWindow>
         </WindowContainer>
-
     )
 }
