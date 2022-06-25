@@ -1,5 +1,5 @@
 import {MainCompany} from "./MainCompany";
-import {collection, getDocs} from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import {db} from "../context/firebase";
 import {useEffect, useState} from "react";
 import {useUserAuth} from "../context/UserAuthContext";
@@ -10,17 +10,24 @@ export function MainApp() {
 
     const { user } = useUserAuth();
 
+    useEffect( () => {
         const uploadUserData = async () => {
-                const querySnapshot = await getDocs(collection(db, `${user.email}`));
-                    querySnapshot.forEach((doc) => {
-                    setUserData( prevState => [ ...prevState, {id: doc.id, data: doc.data() } ] );
-                });
-            }
+            const docRef = doc(db, user.email, "users");
+            const docSnap = await getDoc(docRef);
 
-         useEffect(() => {
-            const menageData = () => uploadUserData();
-            return menageData;
-        }, [user]);
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                setUserData([
+                    ...userData,
+                    docSnap.data()
+                ]);
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
+        return () => uploadUserData();
+    }, []);
 
     return (
             <Window>

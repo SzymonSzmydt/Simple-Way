@@ -16,7 +16,7 @@ export function MainCompany({ userData }) {
 
     // After Clicking Name in Lists
     const handleSelectListItem = (element) => {
-        setSelectedKey(element.key);
+        setSelectedKey(element.username + element.surname);
         setMyUser(element);
         }
 
@@ -41,12 +41,12 @@ export function MainCompany({ userData }) {
                 </section>
                 <WindowListsItems>
                     { userData.map( (e, i) =>
-                        <div key={i} className={ifListItemSelected(e.id)} onClick={ () => handleSelectListItem({key: e.id, data: e.data["getUser"]}) }>
-                            {e.data.getUser.username} {e.data.getUser.surname}
+                        <div key={i} className={ifListItemSelected(e.key.name + e.key.surname)} onClick={ () => handleSelectListItem(e["key"]) }>
+                            { e.key.username } { e.key.surname }
                         </div> ) }
                 </WindowListsItems>
             </SmallTitleWindow>
-            <Information myUser={ myUser.data } />
+            <Information myUser={myUser} />
         </BigWindowTitleInfo>
     )
 }

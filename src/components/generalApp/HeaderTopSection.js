@@ -12,7 +12,7 @@ export function HeaderTopSection({ myUser, setChoiceMonth, setAddProductButton }
         <div>
             <div>
                 <SmallTitleWindow windowTitle={"Sprzedawca"}>
-                    {myUser.data.username} {myUser.data.surname}
+                    {myUser.username} {myUser.surname}
                     <EditIcon onClick={handleBack} />
                 </SmallTitleWindow>
                 <SmallTitleWindow windowTitle={"Miesiąc"} >

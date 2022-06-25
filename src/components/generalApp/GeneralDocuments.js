@@ -1,17 +1,7 @@
 import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 
-const test = {
-    lp: " ",
-    nr: " ",
-    name: " ",
-    summary: " ",
-    data: " "
-}
-
 export const GeneralDocuments = ({ thatMonth }) => {
-
-    if (thatMonth === undefined) thatMonth = test;
 
     return (
         <WindowContainer>

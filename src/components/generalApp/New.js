@@ -3,9 +3,14 @@ import {SmallTitleWindow} from "../windows/SmallTitleWindow";
 import {useState} from "react";
 import {SmallButton} from "../button/SmallButton";
 import {WindowContainer} from "../windows/WindowContainer";
+import {doc, setDoc} from "firebase/firestore";
+import {db} from "../../context/firebase";
+import {useUserAuth} from "../../context/UserAuthContext";
 
-export function New({ setAddProductButton, setSellOfDay }) {
+
+export function New({ setAddProductButton }) {
     const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
+    const [ sending, setSending ] = useState(false);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -14,12 +19,30 @@ export function New({ setAddProductButton, setSellOfDay }) {
             [e.target.name] : e.target.value
         });
     }
+    const [ isValid, setIsValid ] = useState(true);
+    const style = {
+        backgroundColor: !isValid ? "#B07483" : "",
+        color: !isValid ? "white" : ""
+    }
+    const { user } = useUserAuth();
 
-    const saveData = ()=> {
+    const saveData = async () => {
         if (products.date.length === 10 && products.sum.length > 0) {
-            setSellOfDay(products);
-        }
+            const year = new Date().getFullYear().toLocaleString();
+            const dateNumber = products.date.replace(/-/g,'');
 
+            setIsValid(true);
+            setSending(!sending);
+
+            try {
+                const docRef = await setDoc( doc(db, user.email, year), {[dateNumber] : products});
+                console.log("Document written with id: ", dateNumber);
+                setAddProductButton(false);
+            } catch (e) {
+                console.error("Error adding document: ", e);
+            }
+        }
+        return setIsValid(false)
     }
 
     const cancel = () => {
@@ -28,7 +51,7 @@ export function New({ setAddProductButton, setSellOfDay }) {
     }
     return (
         <WindowContainer>
-            <SmallTitleWindow windowTitle={"Sprzedaż w danym dniu"}>
+            <SmallTitleWindow style={style} windowTitle={ isValid ? "Sprzedaż w danym dniu" : "Pola niekompletne lub mają nieprawdłowe wartości" }>
                 <form className="new">
                     <label className="new__label">
                         Data

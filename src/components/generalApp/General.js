@@ -11,12 +11,10 @@ export function General() {
     const location = useLocation();
     const myUser = location.state["myUser"];
 
-    const [ sellOfDay, setSellOfDay ] = useState({});
-
     const [ addProductButton, setAddProductButton ] = useState(false);
     const whenAddingNewProduct =
         addProductButton ?
-            <New setAddProductButton={setAddProductButton} setSellOfDay={setSellOfDay}/>
+            <New setAddProductButton={setAddProductButton} />
             : <GeneralHeader myUser={myUser} setAddProductButton={setAddProductButton}/>;
 
     return (

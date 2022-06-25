@@ -1,7 +1,7 @@
 import {SmallTitleWindow} from "./SmallTitleWindow";
 
 export function Information( {myUser} ) {
-    if (!myUser) return null;
+    if (!myUser) return <div> Loading... </div>;
 
     return (
         <SmallTitleWindow windowTitle={"Informacje o podmiocie"} style={{minWidth: "18rem"}}>
