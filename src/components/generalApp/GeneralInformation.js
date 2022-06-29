@@ -13,7 +13,7 @@ export function GeneralInformation({ month }) {
                 <td className="text__align-right"> 0 zł </td>
             </tr>
             <tr className="text-list">
-                <td> <b> Pozostało do wykorzystania </b> </td>
+                <td> <b> Niewykorzystana kwota </b> </td>
                 <td className="text__align-right"> 0 zł </td>
             </tr>
             </tbody>

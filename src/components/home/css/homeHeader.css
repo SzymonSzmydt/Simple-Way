@@ -1,0 +1,60 @@
+.home__header {
+    display: flex;
+    flex-direction: column;
+
+    width: 60rem;
+    margin-top: 1rem;
+
+    color: var(--color-white);
+}
+
+.home-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-secondary);
+
+    background-color: var(--color-third);
+    border-radius: var(--radius);
+}
+
+.home__title-context {
+    font-weight: 500;
+    font-size: 1.25rem;
+
+    padding-bottom: 1rem;
+
+    border-bottom: 2px solid var(--color-third);
+}
+
+.home__body {
+    display: flex;
+    margin-bottom: 1.25rem;
+
+}
+
+.section-left {
+    padding: 2rem;
+
+    color: var(--color-secondary);
+    background-color: var(--color-white);
+}
+
+.section-right {
+    width: 95rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("C:\Users\szymo\Desktop\React Projects\ReactProject\src\assets\pexels-david-bares-204511.jpg");
+}
+
+.section-bottom {
+    padding: 2rem;
+
+    background-color: var(--color-primary);
+    border-radius: var(--radius);
+}

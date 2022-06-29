@@ -55,7 +55,7 @@ export function AddSeller() {
 
             try {
                 const docRef = await  doc(db, user.email, "users");
-                setDoc(docRef, { key : users },{ merge: true } )
+                setDoc(docRef, { key : users },{ merge: true } );
                 console.log("Document written");
             } catch (e) {
                 console.error("Error adding document: ", e);

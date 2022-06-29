@@ -1,14 +1,13 @@
-import "./css/home.css";
-import {BigButton} from "../button/BigButton";
-import {useNavigate} from "react-router-dom";
 import {Window} from "../windows/Window";
+import {HomeHeader} from "./HomeHeader";
+import {HomeContent} from "./HomeContent";
 
 export function Home() {
-    const navigate = useNavigate();
 
     return (
         <Window>
-            <BigButton name={"Zaczynamy"} onClick={()=> navigate("/application", true)}/>
+                <HomeHeader />
+                <HomeContent />
         </Window>
     )
 }

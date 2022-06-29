@@ -1,10 +1,14 @@
 .window {
+    display: flex;
+    justify-content: center;
+
     padding: 1rem;
 }
 
 .window-row {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 
     background-color: #FFFFFF;
 }

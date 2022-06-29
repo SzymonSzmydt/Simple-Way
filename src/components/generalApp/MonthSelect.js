@@ -1,25 +1,29 @@
 import "./css/monthSelect.css";
-export function MonthSelect( {setChoiceMonth} ) {
 
+
+export function MonthSelect( {setChoiceMonth} ) {
+    const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+    const monthDigit = new Date().getMonth().toLocaleString();
+    const defaultMonth = monthsText[monthDigit];
     const handleSelect = (e) => {
         setChoiceMonth(e);
     }
 
     return (
         <form className="monthSelect">
-            <select onChange={(e)=> handleSelect(e.target.value)}>
-                <option value="Styczeń" > Styczeń </option>
-                <option value="Luty"> Luty </option>
-                <option value="Marzec"> Marzec </option>
-                <option value="Kwiecień"> Kwiecień </option>
-                <option value="Maj"> Maj </option>
-                <option value="Czerwiec"> Czerwiec </option>
-                <option value="Lipiec"> Lipiec </option>
-                <option value="Sierpień"> Sierpień </option>
-                <option value="Wrzesień" > Wrzesień </option>
-                <option value="Październik"> Październik </option>
-                <option value="Listopad"> Listopad </option>
-                <option value="Grudzień"> Grudzień </option>
+            <select onChange={(e)=> handleSelect(e.target.value)} defaultValue={defaultMonth}>
+                <option value="styczeń" > Styczeń </option>
+                <option value="luty"> Luty </option>
+                <option value="marzec"> Marzec </option>
+                <option value="kwiecień"> Kwiecień </option>
+                <option value="maj"> Maj </option>
+                <option value="czerwiec"> Czerwiec </option>
+                <option value="lipiec"> Lipiec </option>
+                <option value="sierpień"> Sierpień </option>
+                <option value="wrzesień" > Wrzesień </option>
+                <option value="październik"> Październik </option>
+                <option value="listopad"> Listopad </option>
+                <option value="grudzień"> Grudzień </option>
             </select>
         </form>
     )

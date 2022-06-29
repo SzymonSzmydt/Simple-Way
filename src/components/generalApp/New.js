@@ -8,9 +8,8 @@ import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 
 
-export function New({ setAddProductButton }) {
+export function New({ setAddProductButton, choiceMonth }) {
     const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
-    const [ sending, setSending ] = useState(false);
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -29,14 +28,15 @@ export function New({ setAddProductButton }) {
     const saveData = async () => {
         if (products.date.length === 10 && products.sum.length > 0) {
             const year = new Date().getFullYear().toLocaleString();
-            const dateNumber = products.date.replace(/-/g,'');
+            const dayBefore = products.date.slice(-2);
+            const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
 
             setIsValid(true);
-            setSending(!sending);
 
             try {
-                const docRef = await setDoc( doc(db, user.email, year), {[dateNumber] : products});
-                console.log("Document written with id: ", dateNumber);
+                const docRef = await doc(db, user.email, year);
+                setDoc(docRef, { [choiceMonth] : { [dayAfter] : products } }, {merge: true} );
+                console.log("Document written with id: ");
                 setAddProductButton(false);
             } catch (e) {
                 console.error("Error adding document: ", e);
@@ -46,7 +46,6 @@ export function New({ setAddProductButton }) {
     }
 
     const cancel = () => {
-        setProducts({date: '', sum: '', info: ''});
         setAddProductButton(false);
     }
     return (
@@ -66,7 +65,7 @@ export function New({ setAddProductButton }) {
                         <input id="info" type="text" name="info" onChange={event => handleChange(event)} />
                     </label>
                 </form>
-                <div className="window-row bottom-margin">
+                <div className="bottom-margin">
                     <SmallButton name={"Zapisz"} onClick={ saveData }/>
                     <SmallButton name={"Anuluj"} onClick={ cancel }/>
                 </div>

@@ -1,0 +1,64 @@
+.content-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem;
+
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--color-secondary);
+
+    background-color: #FFFFFF;
+    border-radius: var(--radius);
+}
+
+.content__title-context {
+    font-weight: 500;
+    font-size: 1.25rem;
+
+    padding-bottom: 1rem;
+
+    color: var(--color-secondary);
+
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.content-right {
+    padding: 2rem;
+
+    color: var(--color-primary);
+}
+
+.content-img {
+    height: 13rem;
+    background-image: url("C:\Users\szymo\Desktop\React Projects\ReactProject\src\assets\pexels-lumn-327882.jpg");
+}
+
+.content-bottom {
+    padding: 2rem;
+
+    color: var(--color-secondary);
+    background-color: var(--color-green-light);
+    border-radius: var(--radius);
+}
+
+.home-link {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.home-link:hover {
+    color: var(--color-bonus);
+}
+
+.content__title-marketing {
+    font-weight: 500;
+    font-size: 1.25rem;
+
+    padding-bottom: 1rem;
+
+    color: var(--color-secondary);
+
+    border-bottom: 2px solid var(--color-accent);
+}
