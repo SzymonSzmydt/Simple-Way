@@ -5,9 +5,8 @@ export function ButtonPanel({ setAddProductButton }) {
 
     return (
         <div className="buttonPanel">
-            <SmallButton name={"Dodaj"} onClick={()=> setAddProductButton(true)}/>
-            <SmallButton name={"Zmień"} />
-            <SmallButton name={"Usuń"} />
+            <SmallButton name={"Dodaj"} onClick={()=> setAddProductButton(true)} />
+            <span> Nowy wpis do ewidencji </span>
         </div>
     )
 }

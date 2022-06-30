@@ -21,18 +21,23 @@
     text-align: center;
     color: var(--color-primary);
 
-    background-color: var(--color-white);
-    border: 1px solid #FFFFFF;
+    border-bottom: 1px solid var(--color-white);
 }
 
 .col:nth-col(odd) {
     background-color: #FFFFFF;
 }
 
-
-
 .col-lp {
     width: 5%;
+}
+
+.col-data {
+    width: 15%;
+}
+
+.col-summary {
+    width: 15%;
 }
 
 .col-total {
@@ -42,13 +47,27 @@
 }
 
 .col-suggestions {
-    width: 45%;
+    width: 35%;
 }
 
-.col-summary {
-    width: 15%;
+.col-options {
+    width: 10%;
 }
 
-.col-data {
-    width: 15%;
+.edit-icon {
+    cursor: pointer;
+    height: 1rem;
+}
+
+.edit-icon:hover {
+    color: var(--color-green)
+}
+
+.delete-icon {
+    cursor: pointer;
+    height: 1rem;
+}
+
+.delete-icon:hover {
+    color: var(--color-accent)
 }

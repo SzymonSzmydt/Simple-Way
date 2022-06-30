@@ -49,7 +49,7 @@ export function General() {
     const whenAddingNewProduct =
         addProductButton ?
             <New setAddProductButton={setAddProductButton} choiceMonth={choiceMonth} />
-            : <GeneralHeader myUser={myUser} setAddProductButton={setAddProductButton} setChoiceMonth={setChoiceMonth} choiceMonth={choiceMonth} />;
+            : <GeneralHeader myUser={myUser} setAddProductButton={setAddProductButton} setChoiceMonth={setChoiceMonth} choiceMonth={choiceMonth} totalMonth={totalMonth}/>;
 
     return (
         <Window>
