@@ -2,18 +2,22 @@ import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
 import {LoadingSpinner} from "../LoadingSpinner";
+import {useState} from "react";
 
 export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
-    console.log("Documents:", documents );
-
     const documentsKeys = documents.length > 0 ? Object.keys(documents[0]) : [];
-    console.log("Values", documentsKeys );
 
-    let isMonthInDocuments = documentsKeys.includes(choiceMonth);
-    const documentsValues = isMonthInDocuments ? Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
+    const isMonthInDocuments = documentsKeys.includes(choiceMonth);
+    const documentsValues = isMonthInDocuments ?
+        Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
+
+    const [ updateComponent, setUpdateComponent ] = useState(false);
 
     const data = isMonthInDocuments ? documentsValues.map( ( {date, sum, info}, i ) =>
-            <DocumentsLists key={date} date={date} sum={sum} info={info} i={i} choiceMonth={choiceMonth} documents={documents}/>
+            <DocumentsLists key={date} date={date} sum={sum} info={info} i={i}
+                            choiceMonth={choiceMonth} documents={documents[0]}
+                            setUpdateComponent={setUpdateComponent} updateComponent={updateComponent}
+            />
         ) : null;
 
     const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;

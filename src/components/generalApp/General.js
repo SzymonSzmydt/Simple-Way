@@ -24,7 +24,6 @@ export function General() {
     const year = new Date().getFullYear().toLocaleString();
 
     useEffect(() => {
-
         const fetchData = async () => {
             const docRef = doc(db, user.email, year);
             const docSnap = await getDoc(docRef);
@@ -44,18 +43,18 @@ export function General() {
     }, []);
 
     const [ totalMonth, setTotalMonth ] = useState(0);
-
     const [ addProductButton, setAddProductButton ] = useState(false);
+
     const whenAddingNewProduct =
         addProductButton ?
-            <New setAddProductButton={setAddProductButton} choiceMonth={choiceMonth} />
+            <New setAddProductButton={setAddProductButton} documents={documents}/>
             : <GeneralHeader myUser={myUser} setAddProductButton={setAddProductButton} setChoiceMonth={setChoiceMonth} choiceMonth={choiceMonth} totalMonth={totalMonth}/>;
 
     return (
         <Window>
             <div>
                 { whenAddingNewProduct }
-                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth}/>
+                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} />
             </div>
         </Window>
     )

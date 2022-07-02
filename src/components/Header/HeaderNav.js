@@ -6,10 +6,10 @@ export function HeaderNav() {
     return (
         <div className="header__nav">
             <Link to="/Home" className="header__nav-link">
-                POCZĄTEK
+                <span className="material-symbols-outlined icon">home</span>
             </Link>
             <Link to="/application" className="header__nav-link">
-                ZACZNIJ EWIDENCJĘ
+                <span className="material-symbols-outlined icon">app_registration</span>
             </Link>
         </div>
     )

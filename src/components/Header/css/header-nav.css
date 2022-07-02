@@ -31,3 +31,7 @@
 .header__nav-link:hover {
     color: var(--color-green);
 }
+
+.icon {
+    font-size: 2rem;
+}

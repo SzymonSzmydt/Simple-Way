@@ -8,8 +8,12 @@ import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 
 
-export function New({ setAddProductButton, choiceMonth }) {
+export function New({ setAddProductButton, documents }) {
+    const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
+
+    const monthDigit = products.date.charAt(5) == 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
+    let selectedMonth = monthsText[monthDigit - 1];
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -35,9 +39,10 @@ export function New({ setAddProductButton, choiceMonth }) {
 
             try {
                 const docRef = await doc(db, user.email, year);
-                setDoc(docRef, { [choiceMonth] : { [dayAfter] : products } }, {merge: true} );
+                setDoc(docRef, { [selectedMonth] : { [dayAfter] : products } }, {merge: true} );
                 console.log("Document written with id: ");
                 setAddProductButton(false);
+                documents[0][selectedMonth][dayAfter] = products;
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
