@@ -10,6 +10,9 @@ import {doc, getDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 
 export function General() {
+    const location = useLocation();
+    const myUser = location.state["myUser"];
+
     const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     const monthDigit = new Date().getMonth().toLocaleString();
     const defaultMonth = monthsText[monthDigit];
@@ -30,7 +33,7 @@ export function General() {
                 console.log("Document data:", docSnap.data());
                 setDocuments([
                     ...documents,
-                    docSnap.data()[choiceMonth]
+                    docSnap.data()
                 ]);
             } else {
                 // doc.data() will be undefined in this case
@@ -38,10 +41,7 @@ export function General() {
             }
         }
         return () => fetchData();
-    }, [choiceMonth]);
-
-    const location = useLocation();
-    const myUser = location.state["myUser"];
+    }, []);
 
     const [ totalMonth, setTotalMonth ] = useState(0);
 

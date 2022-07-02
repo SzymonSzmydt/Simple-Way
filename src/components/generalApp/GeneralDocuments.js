@@ -1,16 +1,22 @@
 import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
+import {LoadingSpinner} from "../LoadingSpinner";
 
 export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
+    console.log("Documents:", documents );
 
-    const documentsValues = documents.length && documents != null > 0 ? documents.map( e => Object.values(e)) : null;
+    const documentsKeys = documents.length > 0 ? Object.keys(documents[0]) : [];
+    console.log("Values", documentsKeys );
 
-    const data = documents.length > 0 ? documentsValues[0].map( ( {date, sum, info}, i ) =>
+    let isMonthInDocuments = documentsKeys.includes(choiceMonth);
+    const documentsValues = isMonthInDocuments ? Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
+
+    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum, info}, i ) =>
             <DocumentsLists key={date} date={date} sum={sum} info={info} i={i} choiceMonth={choiceMonth} documents={documents}/>
         ) : null;
 
-    const sumOfMonth = documents.length > 0 ? documentsValues[0].reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
+    const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
     setTotalMonth(sumOfMonth);
 
     return (
@@ -27,7 +33,7 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
                     </tr>
                 </thead>
                 <tbody>
-                { data }
+                { documents.length > 0 ? data : <tr><td colSpan="6"><LoadingSpinner/></td></tr> }
                 </tbody>
             </table>
         </WindowContainer>

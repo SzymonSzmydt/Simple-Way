@@ -4,6 +4,7 @@ import {db} from "../context/firebase";
 import {useEffect, useState} from "react";
 import {useUserAuth} from "../context/UserAuthContext";
 import {Window} from "./windows/Window";
+import {LoadingSpinner} from "./LoadingSpinner";
 
 export function MainApp() {
     const [ userData, setUserData ] = useState([]);// props
@@ -30,7 +31,7 @@ export function MainApp() {
 
     return (
             <Window>
-                { isLoading ? <MainCompany userData={userData[0]} /> : "Loading..." }
+                { isLoading ? <MainCompany userData={userData[0]} /> : <LoadingSpinner /> }
             </Window>
     )
 }
