@@ -2,12 +2,12 @@ import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
 
-export const GeneralDocuments = ({ documents, setTotalMonth }) => {
+export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
 
-    const documentsValues = documents.length > 0 ? documents.map( e => Object.values(e)) : null;
+    const documentsValues = documents.length && documents != null > 0 ? documents.map( e => Object.values(e)) : null;
 
     const data = documents.length > 0 ? documentsValues[0].map( ( {date, sum, info}, i ) =>
-            <DocumentsLists key={date} date={date} sum={sum} info={info} i={i} />
+            <DocumentsLists key={date} date={date} sum={sum} info={info} i={i} choiceMonth={choiceMonth} documents={documents}/>
         ) : null;
 
     const sumOfMonth = documents.length > 0 ? documentsValues[0].reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;

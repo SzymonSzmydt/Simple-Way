@@ -38,7 +38,7 @@ export function General() {
             }
         }
         return () => fetchData();
-    }, []);
+    }, [choiceMonth]);
 
     const location = useLocation();
     const myUser = location.state["myUser"];
@@ -55,7 +55,7 @@ export function General() {
         <Window>
             <div>
                 { whenAddingNewProduct }
-                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth}/>
+                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth}/>
             </div>
         </Window>
     )

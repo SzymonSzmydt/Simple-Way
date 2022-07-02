@@ -52,10 +52,11 @@ export function AddSeller() {
             setError("Nieprawidłowy kod pocztowy");
         }
         else {
+            let newUser = users.username + users.surname;
 
             try {
                 const docRef = await  doc(db, user.email, "users");
-                setDoc(docRef, { key : users },{ merge: true } );
+                setDoc(docRef, { [newUser] : users },{ merge: true } );
                 console.log("Document written");
             } catch (e) {
                 console.error("Error adding document: ", e);
