@@ -3,17 +3,12 @@ import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 
 
-export function DocumentsLists({ date, sum, info, i, documents, choiceMonth, setUpdateComponent, updateComponent }) {
+export function DocumentsLists({ date, sum, info, index, documents, choiceMonth, setUpdateComponent, updateComponent, total }) {
     const { user } = useUserAuth();
-
-    console.log("DocumentsLists ", documents);
-    console.log("await", documents[choiceMonth]);
-
     const documentsKeys = Object.keys(documents[choiceMonth]);
 
     const saveData = async () => {
         const year = new Date().getFullYear().toLocaleString();
-
         try {
             const docRef = await doc(db, user.email, year);
             setDoc(docRef, { [choiceMonth] : [documents[choiceMonth]] }, {merge: true} );
@@ -23,26 +18,26 @@ export function DocumentsLists({ date, sum, info, i, documents, choiceMonth, set
         }
     }
 
-    const handleDeleteClick = (i) => {
-        if (documents[choiceMonth][documentsKeys[i]]) {
-            delete documents[choiceMonth][documentsKeys[i]];
+    console.log(" tutaj ", documents);
+
+    const handleDeleteClick = (index) => {
+        if (documents[choiceMonth][documentsKeys[index]]) {
+            delete documents[choiceMonth][documentsKeys[index]];
             setUpdateComponent(!updateComponent);
-            return saveData(i);
+            return saveData(index);
         }
         return console.log("Error, object value not exist");
     }
 
-
     return (
                 <tr>
-                    <td className="col"> { i + 1 } </td>
+                    <td className="col"> { index + 1 } </td>
                     <td className="col"> { date } </td>
                     <td className="col"> { sum + " zł" } </td>
-                    <td className="col"> { null } </td>
+                    <td className="col"> { total.toFixed(2) + " zł" } </td>
                     <td className="col"> { info } </td>
                     <td className="col">
-                        <span className="material-symbols-outlined edit-icon" >edit</span>
-                        <span className="material-symbols-outlined delete-icon" onClick={(e)=> handleDeleteClick( i ) }>delete</span>
+                        <span className="material-symbols-outlined delete-icon" onClick={(e)=> handleDeleteClick( index ) }>delete</span>
                     </td>
                 </tr>
     )

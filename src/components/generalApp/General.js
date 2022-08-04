@@ -40,7 +40,7 @@ export function General() {
             }
         }
         return () => fetchData();
-    }, []);
+    },[]);
 
     const [ totalMonth, setTotalMonth ] = useState(0);
     const [ addProductButton, setAddProductButton ] = useState(false);
@@ -49,12 +49,12 @@ export function General() {
         addProductButton ?
             <New setAddProductButton={setAddProductButton} documents={documents}/>
             : <GeneralHeader myUser={myUser} setAddProductButton={setAddProductButton} setChoiceMonth={setChoiceMonth} choiceMonth={choiceMonth} totalMonth={totalMonth}/>;
-
+    const copy = {documents};
     return (
         <Window>
             <div>
                 { whenAddingNewProduct }
-                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} />
+                <GeneralDocuments documents={copy} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} />
             </div>
         </Window>
     )

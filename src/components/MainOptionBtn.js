@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 export function MainOptionBtn({ handleChoiceClick, handleDeleteClick }) {
     const navigate = useNavigate();
 
-    // After Clicking button Dodaj navigate to /add site
     const handleAddClick = ()=> navigate("/add", true);
 
     return (

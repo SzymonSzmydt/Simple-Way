@@ -8,7 +8,6 @@ import {AddSeller} from "./seller/AddSeller";
 import {General} from "./generalApp/General";
 import {Routes, Route, Link} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
-import {New} from "./generalApp/New";
 
 export function App() {
 
@@ -17,12 +16,9 @@ export function App() {
         <UserAuthContextProvider>
             <Header />
             <Routes>
-                {/* public routes */}
                 <Route path="/" element={ <Home /> } />
                 <Route path="/login" element={ <LoginWindow/> } />
                 <Route path="/register" element={ <RegisterWindow/> } />
-
-                {/* private routes */}
                 <Route path="/application" element={
                     <ProtectedRoute>
                         <MainApp />
@@ -38,8 +34,6 @@ export function App() {
                         <General />
                     </ProtectedRoute>
                 } />
-
-                {/* catch all */}
                 <Route path="*" element={ <Home /> } />
             </Routes>
         </UserAuthContextProvider>

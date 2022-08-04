@@ -13,17 +13,15 @@ export function MainCompany({ userData }) {
     const [ myUser, setMyUser ] = useState({});
 
     const userDataValues = Object.values(userData);
+    const userDataKeys = Object.keys(userData);
 
-    // After Clicking Name in Lists
     const handleSelectListItem = (element) => {
         setSelectedElement(element.username + element.surname);
         setMyUser(element);
         }
 
-    // After Selected list Item
     const ifListItemSelected = ( key ) => key === selectedElement ? "single-clicked" : "single-list";
 
-    // After Clicking Wybierz button
     const handleChoiceClick = () => {
         if (selectedElement.length > 0) navigate('/application/general',{state: {myUser}});
         return null;
@@ -38,7 +36,7 @@ export function MainCompany({ userData }) {
         return console.log("Nie wybrano użytkownika!");
     }
 
-    const optionWindow = toDelete ? <DeleteAsk setToDelete={setToDelete} userData={userData} selectedElement={selectedElement} /> :
+    const optionWindow = toDelete ? <DeleteAsk selectedElement={selectedElement} /> :
         <MainOptionBtn handleChoiceClick={handleChoiceClick} handleDeleteClick={handleDeleteClick} />;
 
     const style= {

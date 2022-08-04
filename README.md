@@ -6,7 +6,7 @@
 > 
 > _Wersja aplikacji przygotowana tylko dla widoku Desktop_
 > 
-> ## Ewidencja dla działalności nierejestrowalnej
+> ## Ewidencja dla działalności nierejestrowanej
 > ___
 > Aplikacja pozwala ewidencjonować sprzedaż w roku kalendarzowym    
 > kontrolując limit ustalony do połowy minimalnego wynagrodzenia   

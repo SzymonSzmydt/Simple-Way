@@ -12,7 +12,7 @@ export function New({ setAddProductButton, documents }) {
     const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
 
-    const monthDigit = products.date.charAt(5) == 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
+    const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
     let selectedMonth = monthsText[monthDigit - 1];
 
     const handleChange = (e) => {
@@ -29,7 +29,7 @@ export function New({ setAddProductButton, documents }) {
     }
     const { user } = useUserAuth();
 
-    const saveData = async () => {
+    const saveRecords = async () => {
         if (products.date.length === 10 && products.sum.length > 0) {
             const year = new Date().getFullYear().toLocaleString();
             const dayBefore = products.date.slice(-2);
@@ -71,7 +71,7 @@ export function New({ setAddProductButton, documents }) {
                     </label>
                 </form>
                 <div className="bottom-margin">
-                    <SmallButton name={"Zapisz"} onClick={ saveData }/>
+                    <SmallButton name={"Zapisz"} onClick={ saveRecords }/>
                     <SmallButton name={"Anuluj"} onClick={ cancel }/>
                 </div>
             </SmallTitleWindow>

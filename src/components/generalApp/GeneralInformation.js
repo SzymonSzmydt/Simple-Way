@@ -20,10 +20,10 @@ export function GeneralInformation({ month, totalMonth }) {
                         <td className="text__align-right"> {totalMonth.toFixed(2) } zł </td>
                     </tr>
                     <tr className="text-list">
-                        <td style={{color: underLimit ? "red" : ""}}> <b>
+                        <td style={{color: underLimit ? "#B07483" : ""}}> <b>
                             { underLimit ? "Przekroczono limit!" : "Niewykorzystana kwota " }
                         </b> </td>
-                        <td className="text__align-right" style={{color: underLimit ? "red" : ""}}> {1505 - totalMonth.toFixed(2) } zł </td>
+                        <td className="text__align-right" style={{color: underLimit ? "#B07483" : ""}}> {1505 - totalMonth.toFixed(2) } zł </td>
                     </tr>
                 </tbody>
             </table>

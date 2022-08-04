@@ -12,11 +12,18 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
         Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
 
     const [ updateComponent, setUpdateComponent ] = useState(false);
-
-    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum, info}, i ) =>
-            <DocumentsLists key={date} date={date} sum={sum} info={info} i={i}
-                            choiceMonth={choiceMonth} documents={documents[0]}
-                            setUpdateComponent={setUpdateComponent} updateComponent={updateComponent}
+    let total = 0;
+    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum, info}, index ) =>
+            <DocumentsLists 
+                key={date} 
+                date={date} 
+                sum={parseFloat(sum).toFixed(2)}
+                total={total += parseFloat(sum)} 
+                info={info} 
+                index={index}
+                choiceMonth={choiceMonth} documents={documents[0]}
+                setUpdateComponent={setUpdateComponent} 
+                updateComponent={updateComponent}
             />
         ) : null;
 
@@ -31,7 +38,7 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
                         <td className="col-lp"> Lp. </td>
                         <td className="col-data"> Data </td>
                         <td className="col-summary"> Kwota sprzedaży</td>
-                        <td className="col-total"> Kwota narastająca od początku roku </td>
+                        <td className="col-total"> Kwota narastająca od początku misiąca </td>
                         <td className="col-suggestions"> Uwagi </td>
                         <td className="col-options"> Opcje </td>
                     </tr>

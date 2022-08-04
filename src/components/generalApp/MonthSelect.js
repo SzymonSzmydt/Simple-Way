@@ -12,18 +12,10 @@ export function MonthSelect( {setChoiceMonth} ) {
     return (
         <form className="monthSelect">
             <select onChange={(e)=> handleSelect(e.target.value)} defaultValue={defaultMonth}>
-                <option value="styczeń" > Styczeń </option>
-                <option value="luty"> Luty </option>
-                <option value="marzec"> Marzec </option>
-                <option value="kwiecień"> Kwiecień </option>
-                <option value="maj"> Maj </option>
-                <option value="czerwiec"> Czerwiec </option>
-                <option value="lipiec"> Lipiec </option>
-                <option value="sierpień"> Sierpień </option>
-                <option value="wrzesień" > Wrzesień </option>
-                <option value="październik"> Październik </option>
-                <option value="listopad"> Listopad </option>
-                <option value="grudzień"> Grudzień </option>
+                { monthsText.map( e => 
+                    <option key={e} value={e}> 
+                        { e.replace(e.charAt(0), e.charAt(0).toUpperCase()) } 
+                    </option> )}
             </select>
         </form>
     )
