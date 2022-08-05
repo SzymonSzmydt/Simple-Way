@@ -3,7 +3,7 @@ import "./css/homeHeader.css";
 export function HomeHeader() {
 
     return (
-        <div className="home__header">
+        <div className="home__header container">
             <h1 className="home-title">
                 Ewidencja dla działalności nierejestrowanej
             </h1>
@@ -17,7 +17,7 @@ export function HomeHeader() {
                         Ważne! Nie możesz pomniejszyć tego przychodu (1505 zł) o swoje koszty.
                     </p>
                 </div>
-                <div className="section-right" />
+                <div className="section-right"/>
             </div>
             <div className="section-bottom">
                 <h2 className="home__title-context"> Zacznij działać!</h2>

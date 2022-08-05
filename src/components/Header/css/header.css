@@ -30,6 +30,12 @@
     transition: color 0.3s;
 }
 
+@media screen and (max-width: 911px) {
+    .logo {   
+        display: none;
+    }
+}
+
 .logo:hover {
     color: var(--color-green);
 }

@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 export function HomeContent() {
 
     return (
-        <div className="home__header">
+        <div className="home__header container">
             <h2 className="content-title">
                 Jakie są obowiązki przy działalności nierejestrowanej?
             </h2>

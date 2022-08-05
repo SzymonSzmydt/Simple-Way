@@ -6,11 +6,9 @@
   --color-third: #A3ABBD;
   --color-bonus: #B07483;
   --color-accent: #7A4351;
-
   --color-green: #80CF82;
   --color-green-light: #DAF9D8;
   --color-white: #EEF4F5;
-
   --header-height: 4.5rem;
   --radius: 5px;
   --font: 'Roboto', sans-serif;
@@ -21,6 +19,11 @@ body {
   font-family: var(--font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 57rem;
 }
 
 .mainOptionBtn {

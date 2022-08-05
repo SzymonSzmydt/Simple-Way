@@ -28,6 +28,12 @@
     transition: color 0.3s;
 }
 
+@media screen and (max-width: 350px) {
+    .header__nav-link {
+        padding: 0 0.5rem;
+    }
+}
+
 .header__nav-link:hover {
     color: var(--color-green);
 }

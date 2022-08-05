@@ -32,7 +32,9 @@
 
 .content-img {
     height: 13rem;
-    background-image: url("C:\Users\szymo\Desktop\React Projects\ReactProject\src\assets\pexels-lumn-327882.jpg");
+    background-image: url("/public/assets/pexels-lumn-327882.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .content-bottom {

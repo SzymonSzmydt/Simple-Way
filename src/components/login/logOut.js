@@ -18,7 +18,7 @@ export const LogOutButton = () => {
     return (
         <>
             <span className="material-symbols-outlined logout" onClick={handleLogOut}> logout </span>
-            { user.email }
+            <span className="user-email"> { user.email } </span>
         </>
 
     )

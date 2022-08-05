@@ -36,7 +36,7 @@ export function MainCompany({ userData }) {
         return console.log("Nie wybrano użytkownika!");
     }
 
-    const optionWindow = toDelete ? <DeleteAsk selectedElement={selectedElement} /> :
+    const optionWindow = toDelete ? <DeleteAsk selectedElement={selectedElement} userData={userData} /> :
         <MainOptionBtn handleChoiceClick={handleChoiceClick} handleDeleteClick={handleDeleteClick} />;
 
     const style= {
