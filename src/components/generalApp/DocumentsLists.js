@@ -3,7 +3,7 @@ import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 
 
-export function DocumentsLists({ date, sum, info, index, documents, choiceMonth, setUpdateComponent, updateComponent, total }) {
+export function DocumentsLists({ date, sum, index, documents, choiceMonth, setUpdateComponent, updateComponent, total }) {
     const { user } = useUserAuth();
     const documentsKeys = Object.keys(documents[choiceMonth]);
 
@@ -17,8 +17,6 @@ export function DocumentsLists({ date, sum, info, index, documents, choiceMonth,
             console.error("Error adding document: ", e);
         }
     }
-
-    console.log(" tutaj ", documents);
 
     const handleDeleteClick = (index) => {
         if (documents[choiceMonth][documentsKeys[index]]) {
@@ -35,7 +33,6 @@ export function DocumentsLists({ date, sum, info, index, documents, choiceMonth,
                     <td className="col"> { date } </td>
                     <td className="col"> { sum + " zł" } </td>
                     <td className="col"> { total.toFixed(2) + " zł" } </td>
-                    <td className="col"> { info } </td>
                     <td className="col">
                         <span className="material-symbols-outlined delete-icon" onClick={(e)=> handleDeleteClick( index ) }>delete</span>
                     </td>

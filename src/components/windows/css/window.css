@@ -1,12 +1,13 @@
 .window {
     display: flex;
     justify-content: center;
-
-    padding: 1rem;
+    flex-wrap: wrap;    
+    padding: 0.5rem;
 }
 
 .window-row {
     display: flex;
+    flex-wrap: wrap;    
     justify-content: center;
     flex-direction: column;
 

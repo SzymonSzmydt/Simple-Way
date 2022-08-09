@@ -1,3 +1,27 @@
 .general {
     margin: 1rem;
 }
+
+.general__information-table {
+    width: 100%;
+}
+
+.text {
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+
+    padding: 1rem;
+}
+
+.text__align-right {
+    text-align: right;
+}
+
+.text-list {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+}
+
+.text-list > td {
+    border-bottom: 1px solid var(--color-primary);
+}

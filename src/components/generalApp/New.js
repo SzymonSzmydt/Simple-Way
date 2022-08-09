@@ -10,7 +10,7 @@ import {useUserAuth} from "../../context/UserAuthContext";
 
 export function New({ setAddProductButton, documents }) {
     const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
-    const [ products, setProducts ] = useState({date: '', sum: '', info: ''});
+    const [ products, setProducts ] = useState({date: '', sum: ''});
 
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
     let selectedMonth = monthsText[monthDigit - 1];
@@ -55,24 +55,22 @@ export function New({ setAddProductButton, documents }) {
     }
     return (
         <WindowContainer>
-            <SmallTitleWindow style={style} windowTitle={ isValid ? "Sprzedaż w danym dniu" : "Pola niekompletne lub mają nieprawdłowe wartości" }>
-                <form className="new">
-                    <label className="new__label">
-                        Data
-                        <input type="date" name="date" onChange={event => handleChange(event)} />
-                    </label>
-                    <label className="new__label" >
-                        Kwota sprzedaży
-                        <input type="number" name="sum" onChange={event => handleChange(event)} />
-                    </label>
-                    <label className="new__label" >
-                        Uwagi
-                        <input id="info" type="text" name="info" onChange={event => handleChange(event)} />
-                    </label>
-                </form>
-                <div className="bottom-margin">
-                    <SmallButton name={"Zapisz"} onClick={ saveRecords }/>
-                    <SmallButton name={"Anuluj"} onClick={ cancel }/>
+            <SmallTitleWindow style={style} windowTitle={ isValid ? "Nowy wpis rejestru sprzedaży" : "Pola niekompletne lub mają nieprawdłowe wartości" }>
+                <div className="box">
+                    <form className="new">
+                        <label className="new__label">
+                            Data
+                            <input type="date" name="date" onChange={event => handleChange(event)} />
+                        </label>
+                        <label className="new__label" >
+                            Kwota sprzedaży
+                            <input type="number" name="sum" onChange={event => handleChange(event)} />
+                        </label>
+                    </form>
+                    <div className="bottom-margin">
+                        <SmallButton name={"Zapisz"} onClick={ saveRecords }/>
+                        <SmallButton name={"Anuluj"} onClick={ cancel }/>
+                    </div>
                 </div>
             </SmallTitleWindow>
         </WindowContainer>

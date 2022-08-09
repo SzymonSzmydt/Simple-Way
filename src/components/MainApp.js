@@ -1,13 +1,14 @@
-import {MainCompany} from "./MainCompany";
 import { doc, getDoc } from "firebase/firestore";
 import {db} from "../context/firebase";
 import {useEffect, useState} from "react";
 import {useUserAuth} from "../context/UserAuthContext";
 import {Window} from "./windows/Window";
 import {LoadingSpinner} from "./LoadingSpinner";
+import { General } from './generalApp/General';
+import { AddSeller } from './seller/AddSeller';
 
 export function MainApp() {
-    const [ userData, setUserData ] = useState([]);// props
+    const [ userData, setUserData ] = useState({});// props
     const [ isLoading, setIsLoading ] = useState(false);
 
     const { user } = useUserAuth();
@@ -19,7 +20,7 @@ export function MainApp() {
 
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data());
-                setUserData([docSnap.data()]);
+                setUserData(docSnap.data());
                 setIsLoading(true);
             } else {
                 // doc.data() will be undefined in this case
@@ -31,7 +32,9 @@ export function MainApp() {
 
     return (
             <Window>
-                { isLoading ? <MainCompany userData={userData[0]} /> : <LoadingSpinner /> }
+                { isLoading ? 
+                userData ? <General userData={userData}/> : <AddSeller/>
+                 : <LoadingSpinner /> }
             </Window>
     )
 }

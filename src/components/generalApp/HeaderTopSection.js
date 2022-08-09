@@ -1,25 +1,13 @@
 import {SmallTitleWindow} from "../windows/SmallTitleWindow";
-import {EditIcon} from "../button/EditIcon";
 import {MonthSelect} from "./MonthSelect";
-import {ButtonPanel} from "../button/ButtonPanel";
-import {useNavigate} from "react-router-dom";
+import { SmallButton } from './../button/SmallButton';
 
-export function HeaderTopSection({ myUser, setChoiceMonth, setAddProductButton }) {
-    const navigation = useNavigate();
-    const handleBack = () => navigation("/application", true);
+export function HeaderTopSection({ setChoiceMonth, setAddProductButton }) {
 
     return (
-        <div>
-            <div>
-                <SmallTitleWindow windowTitle={"Sprzedawca"}>
-                    {myUser.username} {myUser.surname}
-                    <EditIcon onClick={handleBack} />
-                </SmallTitleWindow>
-                <SmallTitleWindow windowTitle={"Miesiąc"} >
-                    <MonthSelect setChoiceMonth={setChoiceMonth} />
-                </SmallTitleWindow>
-            </div>
-            <ButtonPanel setAddProductButton={setAddProductButton} />
-        </div>
+            <SmallTitleWindow windowTitle={"Miesiąc"} >               
+                <MonthSelect setChoiceMonth={setChoiceMonth} />
+                <SmallButton name={"Nowy wpis"} onClick={()=> setAddProductButton(true)} />
+            </SmallTitleWindow>
     )
 }

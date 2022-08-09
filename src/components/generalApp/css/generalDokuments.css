@@ -2,12 +2,11 @@
     width: 100%;
     margin: 0 1rem;
 
-    border: 2px solid var(--color-third);
     border-radius: var(--radius);
 }
 
 .thead {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--color-secondary);
     padding: 0.25rem 0.75rem;
 
@@ -16,8 +15,9 @@
 }
 
 .col {
-    padding: 0.25rem 0.75rem;
-
+    padding: 0.25rem 0;
+    
+    font-size: 0.8rem;
     text-align: center;
     color: var(--color-primary);
 
@@ -29,43 +29,30 @@
 }
 
 .col-lp {
-    width: 5%;
+    width: 10%;
 }
 
 .col-data {
-    width: 15%;
+    width: 30%;
 }
 
 .col-summary {
-    width: 15%;
+    width: 25%;
 }
 
 .col-total {
-    width: 20%;
+    width: 25%;
 
-    font-size: 0.95rem;
-}
-
-.col-suggestions {
-    width: 35%;
+    font-size: 0.8rem;
 }
 
 .col-options {
     width: 10%;
 }
 
-.edit-icon {
-    cursor: pointer;
-    height: 1rem;
-}
-
-.edit-icon:hover {
-    color: var(--color-green)
-}
-
 .delete-icon {
     cursor: pointer;
-    height: 1rem;
+    font-size: 1.25rem;
 }
 
 .delete-icon:hover {

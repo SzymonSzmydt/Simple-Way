@@ -9,10 +9,10 @@ export function GeneralInformation({ month, totalMonth }) {
 
     return (
         <SmallTitleWindow style={style} windowTitle={ underLimit ? "Przekroczono limit!" : "Przydatne informacje"} >
-            <table style={{width: "20rem", height: "6.3rem"}}>
+            <table className="general__information-table">
                 <tbody>
                     <tr className="text-list" >
-                        <td style={{width: "10rem"}}> <b> Miesiąc </b> </td>
+                        <td> <b> Miesiąc </b> </td>
                         <td className="text__align-right"> { month.charAt(0).toUpperCase() + month.slice(1) } </td>
                     </tr>
                     <tr className="text-list">

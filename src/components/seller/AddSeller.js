@@ -10,18 +10,18 @@ import {SmallTitleWindow} from "../windows/SmallTitleWindow";
 import {BigButton} from "../button/BigButton";
 
 export function AddSeller() {
-    const newSeller = {
-        username: '',
-        surname: '',
-        address: '',
-        postcode: '',
-        city: ''
-    }
     const { user } = useUserAuth();
     const navigate = useNavigate();
     const [ error, setError ] = useState('');
     const [ isValid, setIsValid ] = useState(true);
-    const [ users, setUsers ] = useState(newSeller);
+    const [ users, setUsers ] = 
+        useState({
+            username: '',
+            surname: '',
+            address: '',
+            postcode: '',
+            city: ''
+        });
 
     const handleChange = e => {
         setUsers({
@@ -43,20 +43,18 @@ export function AddSeller() {
             setIsValid(false);
             setError("Nazwisko musi posiadać więcej znaków");
         }
-        else if (users.address.length < 6) {
+        else if (users.address.length < 3) {
             setIsValid(false);
             setError("Adres musi posiadać więcej znaków");
         }
-        else if (users.postcode.length < 6) {
+        else if (!users.postcode.match(/^\d\d-\d\d\d$/)) {
             setIsValid(false);
             setError("Nieprawidłowy kod pocztowy");
         }
         else {
-            let newUser = users.username + users.surname;
-
             try {
                 const docRef = await  doc(db, user.email, "users");
-                setDoc(docRef, { [newUser] : users },{ merge: true } );
+                setDoc(docRef, users );
                 console.log("Document written");
             } catch (e) {
                 console.error("Error adding document: ", e);
@@ -75,7 +73,7 @@ export function AddSeller() {
     return (
         <Window>
             <BigWindowTitleInfo infoText={infoText} >
-                <SmallTitleWindow style={style} windowTitle={ isValid ? "Dodaj podmiot" : error }>
+                <SmallTitleWindow style={style} windowTitle={ isValid ? "Uzupełnij pola" : error }>
                     <form className="form" onSubmit={event => handleSubmit(event)}>
                         <label className="label">
                             Imię

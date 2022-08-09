@@ -8,10 +8,13 @@
 }
 
 .window__body {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
 
+    width: 100%;
     padding-bottom: 1rem;
-    margin: 0 1rem;
+    margin: 0.5rem;
 
     border: 1px solid var(--color-third);
     border-radius: var(--radius);
@@ -23,46 +26,22 @@
 }
 
 .window__body-title {
-    padding: 0.5rem;
+    padding: 0.3rem;
 
     text-align: center;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: var(--color-white);
 
-    background-color: var(--color-third);
+    background-color: var(--color-primary);
 }
 
 .window__body-content {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
 
     padding: 1rem 1rem 0;
 
     color: var(--color-primary);
     font-size: 1rem;
-}
-
-.left-margin {
-    width: 20rem;
-    height: 10rem;
-
-    margin-left: 2rem;
-}
-
-.text {
-    font-size: 1rem;
-    color: var(--color-secondary);
-
-    padding: 1rem;
-}
-
-.text__align-right {
-    text-align: right;
-}
-
-.text-list {
-    color: var(--color-primary);
-}
-
-.text-list > td {
-    padding-right: 1rem;
 }

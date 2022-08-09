@@ -1,9 +1,6 @@
 .new {
     display: flex;
-    justify-content: center;
-
-    width: 46.75rem;
-    margin-bottom: -1rem;
+    font-size: 0.8rem;
 }
 
 .new__label {
@@ -11,8 +8,6 @@
     flex-direction: column;
 
     text-align: center;
-
-    padding: 1rem 0;
 }
 
 .new__label input {
@@ -21,14 +16,17 @@
 
 .new__label > input:nth-child(1) {
     width: 8rem;
+    margin-left: 1rem;
 }
 
-#info {
-    width: 23rem;
+@media screen and (max-width: 910px) {
+    .new__label > input:nth-child(1) {
+        padding: 0.3rem;
+    }
 }
 
 .bottom-margin {
     display: flex;
-    justify-content: center;
-    margin-bottom: -1rem;
+    justify-content: space-evenly;
+    padding: 0;
 }

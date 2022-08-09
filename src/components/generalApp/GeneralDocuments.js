@@ -19,7 +19,6 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
                 date={date} 
                 sum={parseFloat(sum).toFixed(2)}
                 total={total += parseFloat(sum)} 
-                info={info} 
                 index={index}
                 choiceMonth={choiceMonth} documents={documents[0]}
                 setUpdateComponent={setUpdateComponent} 
@@ -35,12 +34,11 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
             <table className="table">
                 <thead className="thead">
                     <tr>
-                        <td className="col-lp"> Lp. </td>
-                        <td className="col-data"> Data </td>
-                        <td className="col-summary"> Kwota sprzedaży</td>
-                        <td className="col-total"> Kwota narastająca od początku misiąca </td>
-                        <td className="col-suggestions"> Uwagi </td>
-                        <td className="col-options"> Opcje </td>
+                        <td className="col col-lp"> Lp. </td>
+                        <td className="col col-data"> Data </td>
+                        <td className="col col-summary"> Kwota sprzedaży</td>
+                        <td className="col col-total"> Kwota rosnąco </td>
+                        <td className="col col-options"> Opcje </td>
                     </tr>
                 </thead>
                 <tbody>
