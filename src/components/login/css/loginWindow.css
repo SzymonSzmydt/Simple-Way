@@ -3,8 +3,8 @@
     align-items: center;
     flex-direction: column;
 
-    width: 30rem;
-    margin: 10rem auto;
+    width: min-content;
+    margin: calc(25%) auto;
 
     color: var(--color-primary);
     font-size: 1rem;
@@ -32,13 +32,7 @@
     justify-content: center;
     flex-direction: column;
 
-    padding: 1rem;
-}
-
-.line {
-    width: 50%;
-    margin-top: 1rem;
-    border-bottom: 2px solid var(--color-third);
+    padding: 1rem 2rem;
 }
 
 .form > label {
@@ -68,12 +62,19 @@
     background: transparent;
 }
 
+.line {
+    width: 50%;
+    margin-top: 1rem;
+    border-bottom: 2px solid var(--color-third);
+}
+
 .login-footer {
     margin: 1.5rem;
 }
 
 .link {
     cursor: pointer;
+    font-size: 0.8rem;
     color: var(--color-secondary);
     font-weight: 500;
 }

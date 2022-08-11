@@ -30,11 +30,33 @@ export function MainApp() {
         return () => uploadUserData();
     }, []);
 
+    const [ documents, setDocuments ] = useState([]);
+    const year = new Date().getFullYear().toLocaleString();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const docRef = doc(db, user.email, year);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                console.log("Document data:", docSnap.data());
+                setDocuments([
+                    ...documents,
+                    docSnap.data()
+                ]);
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }
+        return () => fetchData();
+    },[]);
+
     return (
             <Window>
                 { isLoading ? 
-                userData ? <General userData={userData}/> : <AddSeller/>
-                 : <LoadingSpinner /> }
+                userData ? documents ? <General documents={documents}/> : <AddSeller/>
+                 : <LoadingSpinner /> : <LoadingSpinner /> }
             </Window>
     )
 }

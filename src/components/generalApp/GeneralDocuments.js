@@ -11,20 +11,17 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
     const documentsValues = isMonthInDocuments ?
         Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
 
-    const [ updateComponent, setUpdateComponent ] = useState(false);
     let total = 0;
-    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum, info}, index ) =>
+    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
                 key={date} 
                 date={date} 
                 sum={parseFloat(sum).toFixed(2)}
                 total={total += parseFloat(sum)} 
                 index={index}
-                choiceMonth={choiceMonth} documents={documents[0]}
-                setUpdateComponent={setUpdateComponent} 
-                updateComponent={updateComponent}
-            />
-        ) : null;
+                choiceMonth={choiceMonth} 
+                documents={documents[0]}
+     />) : null;
 
     const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
     setTotalMonth(sumOfMonth);
