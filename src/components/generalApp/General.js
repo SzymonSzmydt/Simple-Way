@@ -27,7 +27,7 @@ export function General({ documents }) {
     return (
         <Window>
                 { whenAddingNewProduct }
-                <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} />
+                { documents ? <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} /> : null }
         </Window>
     )
 }

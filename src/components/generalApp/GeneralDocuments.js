@@ -2,7 +2,7 @@ import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
 import {LoadingSpinner} from "../LoadingSpinner";
-import {useState} from "react";
+import { useEffect, useMemo } from 'react';
 
 export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
     const documentsKeys = documents.length > 0 ? Object.keys(documents[0]) : [];
@@ -10,7 +10,6 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
     const isMonthInDocuments = documentsKeys.includes(choiceMonth);
     const documentsValues = isMonthInDocuments ?
         Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
-
     let total = 0;
     const data = isMonthInDocuments ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
@@ -22,9 +21,10 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
                 choiceMonth={choiceMonth} 
                 documents={documents[0]}
      />) : null;
-
-    const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
-    setTotalMonth(sumOfMonth);
+     const sumOfMonth = useMemo(()=> isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0);
+     useEffect(()=> {  
+        setTotalMonth(sumOfMonth);
+     }, [data]);
 
     return (
         <WindowContainer>

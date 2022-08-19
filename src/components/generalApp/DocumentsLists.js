@@ -1,6 +1,7 @@
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
+import { useCallback } from 'react';
 
 
 export function DocumentsLists({ date, sum, index, documents, choiceMonth, total }) {
@@ -18,13 +19,13 @@ export function DocumentsLists({ date, sum, index, documents, choiceMonth, total
         }
     }
 
-    const handleDeleteClick = (index) => {
+    const handleDeleteClick = useCallback((index) => {
         if (documents[choiceMonth][documentsKeys[index]]) {
             delete documents[choiceMonth][documentsKeys[index]];
             return saveData();
         }
         return console.log("Error, object value not exist");
-    }
+    }, []);
 
     return (
                 <tr>

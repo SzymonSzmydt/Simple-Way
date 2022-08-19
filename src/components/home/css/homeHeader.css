@@ -3,11 +3,13 @@
     flex-wrap: wrap;
     flex-direction: column;
     color: var(--color-white);
+
+    margin-top: 2rem;
 }
 
 @media screen and (max-width: 911px) {
     .home__header {
-        margin-top: -1rem;
+        margin-top: 0.5rem;
     }
 }
 
@@ -22,6 +24,13 @@
 
     background-color: var(--color-third);
     border-radius: var(--radius);
+}
+
+@media screen and (max-width: 911px) {
+    .home-title {
+        font-size: 1.25rem;
+        padding: 1.5rem 1rem;
+    }
 }
 
 .home__title-context {

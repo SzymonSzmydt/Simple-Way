@@ -42,7 +42,6 @@ export function New({ setAddProductButton, documents }) {
                 setDoc(docRef, { [selectedMonth] : { [dayAfter] : products } }, {merge: true} );
                 console.log("Document written with id: ");
                 setAddProductButton(false);
-                documents[0][selectedMonth][dayAfter] = products;
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
