@@ -4,7 +4,7 @@ import {DocumentsLists} from "./DocumentsLists";
 import {LoadingSpinner} from "../LoadingSpinner";
 import { useEffect, useMemo } from 'react';
 
-export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
+export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth, setDocuments }) => {
     const documentsKeys = documents.length > 0 ? Object.keys(documents[0]) : [];
 
     const isMonthInDocuments = documentsKeys.includes(choiceMonth);
@@ -20,6 +20,7 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth }) => {
                 index={index}
                 choiceMonth={choiceMonth} 
                 documents={documents[0]}
+                setDocuments={setDocuments}
      />) : null;
      const sumOfMonth = useMemo(()=> isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0);
      useEffect(()=> {  

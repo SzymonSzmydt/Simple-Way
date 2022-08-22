@@ -1,14 +1,13 @@
 import "./css/new.css";
 import {SmallTitleWindow} from "../windows/SmallTitleWindow";
-import {useState} from "react";
+import {useState, useCallback} from "react";
 import {SmallButton} from "../button/SmallButton";
 import {WindowContainer} from "../windows/WindowContainer";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 
-
-export function New({ setAddProductButton, documents }) {
+export function New({ setAddProductButton, documents, setDocuments }) {
     const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     const [ products, setProducts ] = useState({date: '', sum: ''});
 
@@ -27,14 +26,14 @@ export function New({ setAddProductButton, documents }) {
         backgroundColor: !isValid ? "#B07483" : "",
         color: !isValid ? "white" : ""
     }
+
     const { user } = useUserAuth();
+    const year = new Date().getFullYear().toLocaleString();
+    const dayBefore = products.date.slice(-2);
+    const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
 
-    const saveRecords = async () => {
+    const saveDataToFirestore = async () => {
         if (products.date.length === 10 && products.sum.length > 0) {
-            const year = new Date().getFullYear().toLocaleString();
-            const dayBefore = products.date.slice(-2);
-            const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
-
             setIsValid(true);
 
             try {
@@ -48,6 +47,14 @@ export function New({ setAddProductButton, documents }) {
         }
         return setIsValid(false)
     }
+
+    const saveRecords = useCallback( () => {  
+        setDocuments(state => ([{
+            ...state,
+            [selectedMonth] : { [dayAfter] : products }
+        }]));
+        saveDataToFirestore();
+    }, [selectedMonth, dayAfter, products]);
 
     const cancel = () => {
         setAddProductButton(false);

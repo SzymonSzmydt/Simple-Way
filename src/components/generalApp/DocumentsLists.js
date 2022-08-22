@@ -1,18 +1,18 @@
-import {doc, setDoc} from "firebase/firestore";
+import {doc, updateDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 import { useCallback } from 'react';
 
 
-export function DocumentsLists({ date, sum, index, documents, choiceMonth, total }) {
+export function DocumentsLists({ setDocuments, date, sum, index, documents, choiceMonth, total }) {
     const { user } = useUserAuth();
     const documentsKeys = Object.keys(documents[choiceMonth]);
 
     const saveData = async () => {
         const year = new Date().getFullYear().toLocaleString();
         try {
-            const docRef = await doc(db, user.email, year);
-            setDoc(docRef, { [choiceMonth] : [documents[choiceMonth]] }, {merge: true} );
+            const docRef = doc(db, user.email, year);
+            await updateDoc(docRef, { [choiceMonth] : [documents[choiceMonth]] } );
             console.log("Document written with id: ");
         } catch (e) {
             console.error("Error adding document: ", e);
@@ -22,10 +22,9 @@ export function DocumentsLists({ date, sum, index, documents, choiceMonth, total
     const handleDeleteClick = useCallback((index) => {
         if (documents[choiceMonth][documentsKeys[index]]) {
             delete documents[choiceMonth][documentsKeys[index]];
-            return saveData();
+            saveData();
         }
-        return console.log("Error, object value not exist");
-    }, []);
+    }, [documents, choiceMonth]);
 
     return (
                 <tr>

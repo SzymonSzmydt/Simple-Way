@@ -1,6 +1,6 @@
-import {BigWindowTitleInfo} from "./windows/BigWindowTitleInfo";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import { SmallTitleWindow } from './windows/SmallTitleWindow';
 
 export function LoadingSpinner() {
     const navigation = useNavigate();
@@ -26,13 +26,13 @@ export function LoadingSpinner() {
     }, [counter]);
 
     return (
-        <BigWindowTitleInfo infoText={`Ładowanie danych - jeżeli dane nie istnieją zostaniesz przekierowany do wyboru użytkownika za ${counter}`}>
+        <SmallTitleWindow windowTitle={`Ładowanie danych - jeżeli dane nie istnieją zostaniesz przekierowany do wyboru użytkownika za ${counter}`}>
             <div className="lds-ring">
                 <div></div>
                 <div></div>
                 <div></div>
                 <div></div>
             </div>
-        </BigWindowTitleInfo>
+        </SmallTitleWindow>
     )
 }

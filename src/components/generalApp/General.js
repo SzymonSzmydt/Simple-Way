@@ -5,7 +5,7 @@ import {GeneralHeader} from "./GeneralHeader";
 import {GeneralDocuments} from "./GeneralDocuments";
 import {New} from "./New";
 
-export function General({ documents }) {
+export function General({ documents, setDocuments }) {
     const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
     const monthDigit = new Date().getMonth().toLocaleString();
     const defaultMonth = monthsText[monthDigit];
@@ -17,7 +17,7 @@ export function General({ documents }) {
 
     const whenAddingNewProduct =
         addProductButton ?
-            <New setAddProductButton={setAddProductButton} documents={documents}/>
+            <New setAddProductButton={setAddProductButton} documents={documents} setDocuments={setDocuments}/>
             : <GeneralHeader 
                 setAddProductButton={setAddProductButton} 
                 setChoiceMonth={setChoiceMonth} 
@@ -27,7 +27,12 @@ export function General({ documents }) {
     return (
         <Window>
                 { whenAddingNewProduct }
-                { documents ? <GeneralDocuments documents={documents} setTotalMonth={setTotalMonth} choiceMonth={choiceMonth} /> : null }
+                { documents ? <GeneralDocuments 
+                                documents={documents} 
+                                setTotalMonth={setTotalMonth} 
+                                choiceMonth={choiceMonth} 
+                                setDocuments={setDocuments}
+                                /> : null }
         </Window>
     )
 }

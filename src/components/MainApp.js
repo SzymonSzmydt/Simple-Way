@@ -40,10 +40,7 @@ export function MainApp() {
 
             if (docSnap.exists()) {
                 console.log("Document data:", docSnap.data());
-                setDocuments([
-                    ...documents,
-                    docSnap.data()
-                ]);
+                setDocuments([docSnap.data()]);
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -55,7 +52,7 @@ export function MainApp() {
     return (
             <Window>
                 { isLoading ? 
-                userData ? documents ? <General documents={documents}/> : <AddSeller/>
+                userData ? documents ? <General documents={documents} setDocuments={setDocuments}/> : <AddSeller/>
                  : <LoadingSpinner /> : <LoadingSpinner /> }
             </Window>
     )
