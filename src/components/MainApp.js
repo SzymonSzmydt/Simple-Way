@@ -1,58 +1,87 @@
 import { doc, getDoc } from "firebase/firestore";
 import {db} from "../context/firebase";
-import {useEffect, useState} from "react";
+import {useEffect, useReducer, useCallback} from "react";
 import {useUserAuth} from "../context/UserAuthContext";
 import {Window} from "./windows/Window";
 import {LoadingSpinner} from "./LoadingSpinner";
 import { General } from './generalApp/General';
 import { AddSeller } from './seller/AddSeller';
 
-export function MainApp() {
-    const [ userData, setUserData ] = useState({});// props
-    const [ isLoading, setIsLoading ] = useState(false);
+const initialState = {
+    userData: {},
+    documents: {},
+    isLoading: false
+}
 
+function reducer(state, action) {
+    switch (action.type) {
+        case 'userValues':
+            return {
+                ...state,
+                [action.field]: action.payload
+            }
+        case 'loading':
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+        default:
+            throw new Error(`Uknow action type ${state}`)
+    }
+}
+
+export function MainApp() {
+    const [ state, dispatch ] = useReducer(reducer, initialState);
+    const { userData, documents, isLoading } = state;
     const { user } = useUserAuth();
 
-    useEffect( () => {
-        const uploadUserData = async () => {
-            const docRef = doc(db, user.email, "users");
-            const docSnap = await getDoc(docRef);
+    const uploadUserData = useCallback(async () => {
+        const docRef = doc(db, user.email, "users");
+        const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-                setUserData(docSnap.data());
-                setIsLoading(true);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
+        if (docSnap.exists()) {
+            dispatch({
+                type: 'userValues', field: 'userData', payload: docSnap.data() 
+            });
+            dispatch({
+                type: 'loading', payload: true
+            });
+        } else {
+            console.log("No such document!");
         }
-        return () => uploadUserData();
+    }, [user.email]);
+
+    useEffect( () => {
+        uploadUserData();
     }, []);
 
-    const [ documents, setDocuments ] = useState([]);
     const year = new Date().getFullYear().toLocaleString();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const docRef = doc(db, user.email, year);
-            const docSnap = await getDoc(docRef);
+    const fetchData = useCallback(async () => {
+        const docRef = doc(db, user.email, year);
+        const docSnap = await getDoc(docRef);
 
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-                setDocuments([docSnap.data()]);
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            dispatch({
+                type: 'userValues', 
+                field: 'documents',
+                payload: docSnap.data()
+            });
+        } else {
+            console.log("No such document!");
         }
-        return () => fetchData();
+    }, [user.email, year]);
+
+    useEffect(() => {
+        fetchData();
     },[]);
 
     return (
             <Window>
                 { isLoading ? 
-                userData ? documents ? <General documents={documents} setDocuments={setDocuments}/> : <AddSeller/>
+                userData ? documents ? <General documents={documents} setDocuments={dispatch}/> : 
+                <AddSeller/>
                  : <LoadingSpinner /> : <LoadingSpinner /> }
             </Window>
     )

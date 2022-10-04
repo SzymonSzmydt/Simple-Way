@@ -32,10 +32,9 @@ export function New({ setAddProductButton, documents, setDocuments }) {
     const dayBefore = products.date.slice(-2);
     const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
 
-    const saveDataToFirestore = async () => {
+    const saveDataToFirestore = useCallback( async () => {
         if (products.date.length === 10 && products.sum.length > 0) {
             setIsValid(true);
-
             try {
                 const docRef = await doc(db, user.email, year);
                 setDoc(docRef, { [selectedMonth] : { [dayAfter] : products } }, {merge: true} );
@@ -46,15 +45,17 @@ export function New({ setAddProductButton, documents, setDocuments }) {
             }
         }
         return setIsValid(false)
-    }
+    }, [products, dayAfter, selectedMonth, setAddProductButton, user.email, year]);
+
+    const [ newState, setNewState ] = useState({});
 
     const saveRecords = useCallback( () => {  
         setDocuments(state => ([{
-            ...state,
+            ...state,  
             [selectedMonth] : { [dayAfter] : products }
         }]));
-        saveDataToFirestore();
-    }, [selectedMonth, dayAfter, products]);
+        console.log("po zapisaniu: ", documents)
+    }, [selectedMonth, dayAfter, products, setDocuments]);
 
     const cancel = () => {
         setAddProductButton(false);

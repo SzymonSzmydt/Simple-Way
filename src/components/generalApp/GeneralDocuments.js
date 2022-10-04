@@ -21,11 +21,13 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth, setDoc
                 choiceMonth={choiceMonth} 
                 documents={documents[0]}
                 setDocuments={setDocuments}
+                documentsKeys={documentsKeys}
      />) : null;
      const sumOfMonth = useMemo(()=> isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0);
+     
      useEffect(()=> {  
         setTotalMonth(sumOfMonth);
-     }, [data]);
+     }, [sumOfMonth]);
 
     return (
         <WindowContainer>

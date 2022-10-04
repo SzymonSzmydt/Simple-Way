@@ -4,11 +4,10 @@ import {useUserAuth} from "../../context/UserAuthContext";
 import { useCallback } from 'react';
 
 
-export function DocumentsLists({ setDocuments, date, sum, index, documents, choiceMonth, total }) {
+export function DocumentsLists({ setDocuments, date, sum, index, documents, choiceMonth, total, documentsKeys }) {
     const { user } = useUserAuth();
-    const documentsKeys = Object.keys(documents[choiceMonth]);
 
-    const saveData = async () => {
+    const saveDataToFirestore = async () => {
         const year = new Date().getFullYear().toLocaleString();
         try {
             const docRef = doc(db, user.email, year);
@@ -22,7 +21,6 @@ export function DocumentsLists({ setDocuments, date, sum, index, documents, choi
     const handleDeleteClick = useCallback((index) => {
         if (documents[choiceMonth][documentsKeys[index]]) {
             delete documents[choiceMonth][documentsKeys[index]];
-            saveData();
         }
     }, [documents, choiceMonth]);
 

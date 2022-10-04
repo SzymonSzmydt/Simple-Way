@@ -1,41 +1,79 @@
 import "./css/loginWindow.css";
-import {useState} from "react";
+import {useReducer} from "react";
 import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
 
+const initialState = {
+    email: '',
+    password: '',
+    error: ''
+}
+
+function loginReducer(state, action) {
+    switch (action.type) {
+        case 'field' : {
+            return {
+                ...state,
+                [action.field]: action.value
+            }
+        }
+        case 'login': {
+            return {
+            ...state,
+            error: ''
+            }
+        }
+        case 'error': {
+            return {
+                ...state,
+                error: action.playload
+            }
+        }
+        default: {
+            throw new Error(`Unknown action type: ${action.type}`);
+        }
+    }
+}
+
 export function LoginWindow() {
     const navigate = useNavigate();
+    const [ state, dispatch ] = useReducer(loginReducer, initialState);
 
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ error, setError ] = useState('');
+    const { email, password, error } = state;
     const { logIn, googleSignIn } = useUserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
+        dispatch({ type: 'login' });
+
+        if (email === "" || email.match(/.*\.\w{2,3}/g) === null){
+            return dispatch({ type: 'error', playload: "Please Enter a Valid Email" });
+          }
+        if (password.length < 7 || password.test(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g) === null){
+            return dispatch({ type: 'error', playload: "The password is too simply" });
+        }
 
         try {
             await logIn(email, password);
-            navigate("/application", { replace: true });
+            navigate("/application");
         } catch (err) {
             console.log(err);
-            setError(err.message);
+            dispatch({ type: 'error', playload: err.message })
         }
     }
 
     const handleGoogleSignIn = async (e) => {
         e.preventDefault();
-        setError('');
+        dispatch({ type: 'login' });
 
         try {
             await googleSignIn();
-            navigate("/application", { replace: true });
+            navigate("/application");
         } catch (err) {
             console.log(err);
-            setError(err.message)
+            dispatch({ type: 'error', playload: err.message })
         }
     }
 
@@ -46,13 +84,13 @@ export function LoginWindow() {
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
                 <label htmlFor="email"> Email </label>
-                <input type="email" onChange={ e => setEmail(e.target.value)} autoComplete="email" />
+                <input type="email" onChange={ e => dispatch({ type: 'field', field: 'email', value: e.currentTarget.value })} autoComplete="email" />
                 <label htmlFor="password"> Hasło </label>
-                <input type="password" onChange={ e => setPassword(e.target.value)} autoComplete="current-password" />
+                <input type="password" onChange={ e => dispatch({ type: 'field', field: 'password', value: e.currentTarget.value })} autoComplete="current-password" />
                 <BigButton type={"Submit"} name={"Zaloguj się"} />
             </form>
             <div className="line" />
-            <GoogleButton className="btn" onClick={handleGoogleSignIn} />
+            <GoogleButton className="btn" onClick={() => handleGoogleSignIn} />
 
             <div className="login-footer">
                 Nie masz konta ?

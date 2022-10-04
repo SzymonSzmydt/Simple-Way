@@ -1,32 +1,65 @@
-import {useState} from "react";
+import {useReducer} from "react";
 import "./css/loginWindow.css";
 import {useUserAuth} from "../../context/UserAuthContext";
 import { Link, useNavigate } from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
 
+const initialState = {
+    email: '',
+    password: '',
+    error: ''
+}
+
+function loginReducer(state, action) {
+    switch (action.type) {
+        case 'field' : {
+            return {
+                ...state,
+                [action.field]: action.value
+            }
+        }
+        case 'login': {
+            return {
+            ...state,
+            error: ''
+            }
+        }
+        case 'error': {
+            return {
+                ...state,
+                error: action.playload
+            }
+        }
+        default: {
+            throw new Error(`Unknown action type: ${action.type}`);
+        }
+    }
+}
+
 export function RegisterWindow() {
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const [ error, setError ] = useState('');
+    const [ state, dispatch ] = useReducer(loginReducer, initialState);
+    const { email, password, error } = state;
 
     const { signUp } = useUserAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError('');
+        dispatch({ type: 'login' });
 
-        if (password.length > 7) {
-            try {
-                await signUp(email, password);
-                navigate("/application");
-            } catch (err) {
-                console.log(err);
-                setError(err.message);
-            }
+        if (email === "" || email.match(/.*\.\w{2,3}/g) === null){
+            return dispatch({ type: 'error', playload: "Please Enter a Valid Email" });
+          }
+        if (password.length < 7 || password.test(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g) === null){
+            return dispatch({ type: 'error', playload: "The password is too simply" });
         }
-        else {
-            setError("Hasło musi posiadać więcej niż 6 znaków");
+
+        try {
+            await signUp(email, password);
+            navigate("/application");
+        } catch (err) {
+            console.log(err);
+            dispatch({ type: 'error', playload: err.message })
         }
     }
 
@@ -38,9 +71,9 @@ export function RegisterWindow() {
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
                 <label htmlFor="email"> Email </label>
-                <input type="email" onChange={ e => setEmail(e.target.value)} autoComplete="email" />
+                <input type="email" onChange={ e => dispatch({ type: 'field', field: 'email', value: e.currentTarget.value })} autoComplete="email" />
                 <label htmlFor="password"> Hasło </label>
-                <input type="password" onChange={ e => setPassword(e.target.value)} autoComplete="new-password" />
+                <input type="password" onChange={ e => dispatch({ type: 'field', field: 'password', value: e.currentTarget.value })} autoComplete="new-password" />
                 <BigButton type={"submit"} name={"Zarejestruj się !"} />
             </form>
 

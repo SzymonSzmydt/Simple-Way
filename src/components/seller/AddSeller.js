@@ -1,6 +1,6 @@
 import "./css/addSeller.css";
-import {useState} from "react";
-import { useNavigate } from "react-router-dom";
+import {useReducer} from "react";
+import {useNavigate} from "react-router-dom";
 import {setDoc, doc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
@@ -9,47 +9,62 @@ import {Window} from "../windows/Window";
 import {SmallTitleWindow} from "../windows/SmallTitleWindow";
 import {BigButton} from "../button/BigButton";
 
+const initialState = {
+    username: '',
+    surname: '',
+    address: '',
+    postcode: '',
+    city: '',
+    error: '',
+    isValid: true
+}
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'user':
+            return {
+                ...state,
+                [action.field]: action.value
+            }
+        case 'error': 
+            return {
+                ...state,
+                error: action.payload
+            }
+        case 'validation':
+            return {
+                ...state,
+                isValid: action.payload
+            }
+        default:
+            throw new Error(`Unknown action type: ${action.type}`);
+    }
+}
+
 export function AddSeller() {
     const { user } = useUserAuth();
     const navigate = useNavigate();
-    const [ error, setError ] = useState('');
-    const [ isValid, setIsValid ] = useState(true);
-    const [ users, setUsers ] = 
-        useState({
-            username: '',
-            surname: '',
-            address: '',
-            postcode: '',
-            city: ''
-        });
-
-    const handleChange = e => {
-        setUsers({
-            ...users,
-            [e.target.name]: e.target.value
-        });
-    }
-
-    const handleBack = () => navigate("/application", true);
+    const [ state, dispatch ] = useReducer(reducer, initialState);
+    const { error, isValid, ...users } = state;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (users.username.length < 3) {
-            setIsValid(false);
-            setError("Imię musi posiadać więcej znaków");
+            dispatch({ type: 'validation', payload: false });
+            dispatch({ type: 'error', payload: "Imię musi posiadać więcej znaków" });
         }
         else if (users.surname.length < 4) {
-            setIsValid(false);
-            setError("Nazwisko musi posiadać więcej znaków");
+            dispatch({ type: 'validation', payload: false });
+            dispatch({ type: 'error', payload: "Nazwisko musi posiadać więcej znaków" });
         }
         else if (users.address.length < 3) {
-            setIsValid(false);
-            setError("Adres musi posiadać więcej znaków");
+            dispatch({ type: 'validation', payload: false });
+            dispatch({ type: 'error', payload: "Adres musi posiadać więcej znaków" });
         }
         else if (!users.postcode.match(/^\d\d-\d\d\d$/)) {
-            setIsValid(false);
-            setError("Nieprawidłowy kod pocztowy");
+            dispatch({ type: 'validation', payload: false });
+            dispatch({ type: 'error', payload: "Nieprawidłowy kod pocztowy" });
         }
         else {
             try {
@@ -59,8 +74,8 @@ export function AddSeller() {
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
-            setIsValid(true);
-            navigate("/application", true);
+            dispatch({ type: 'validation', payload: true })
+            navigate("/application");
         }
     }
 
@@ -77,26 +92,36 @@ export function AddSeller() {
                     <form className="form" onSubmit={event => handleSubmit(event)}>
                         <label className="label">
                             Imię
-                            <input type="text" name="username" value={users.name} onChange={ e => handleChange(e)} placeholder="np. Jan" />
+                            <input type="text" name="username"
+                                onChange={ e => dispatch({type: 'user', field: 'username', value: e.currentTarget.value})} 
+                                placeholder="np. Jan" />
                         </label>
                         <label className="label">
                             Nazwisko
-                            <input type="text" name="surname" value={users.surname} onChange={ e => handleChange(e)} placeholder="np. Nowak"/>
+                            <input type="text" name="surname"
+                                 onChange={ e => dispatch({type: 'user', field: 'surname', value: e.currentTarget.value})} 
+                                placeholder="np. Nowak"/>
                         </label>
                         <label className="label">
                             Adres
-                            <input type="text" name="address" value={users.address} onChange={ e => handleChange(e)} placeholder="np. Zakładowa 12"/>
+                            <input type="text" name="address"
+                                onChange={ e => dispatch({type: 'user', field: 'address', value: e.currentTarget.value})}  
+                                placeholder="np. Zakładowa 12"/>
                         </label>
                         <label className="label">
                             Kod Pocztowy
-                            <input type="text" name="postcode" value={users.postcode} onChange={ e => handleChange(e)} placeholder="np. 63-600"/>
+                            <input type="text" name="postcode"
+                                onChange={ e => dispatch({type: 'user', field: 'postcode', value: e.currentTarget.value})}  
+                                placeholder="np. 63-600"/>
                         </label>
                         <label className="label">
                             Miasto
-                            <input type="text" name="city" value={users.city} onChange={ e => handleChange(e)} placeholder="np. Kępno "/>
+                            <input type="text" name="city"
+                                onChange={ e => dispatch({type: 'user', field: 'city', value: e.currentTarget.value})}  
+                                placeholder="np. Kępno "/>
                         </label>
                         <BigButton type={"submit"} name={"Dodaj"} />
-                        <BigButton type={"reset"} onClick={handleBack} name={"Anuluj"} />
+                        <BigButton type={"reset"} onClick={()=> navigate("/application")} name={"Anuluj"} />
                     </form>
                 </SmallTitleWindow>
             </BigWindowTitleInfo>

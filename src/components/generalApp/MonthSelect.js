@@ -1,10 +1,11 @@
 import "./css/monthSelect.css";
 
+const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+const monthDigit = new Date().getMonth().toLocaleString();
+const defaultMonth = monthsText[monthDigit];
 
 export function MonthSelect( {setChoiceMonth} ) {
-    const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
-    const monthDigit = new Date().getMonth().toLocaleString();
-    const defaultMonth = monthsText[monthDigit];
+
     const handleSelect = (e) => {
         setChoiceMonth(e);
     }
