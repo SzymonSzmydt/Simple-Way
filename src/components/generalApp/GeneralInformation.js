@@ -1,6 +1,9 @@
 import {SmallTitleWindow} from "../windows/SmallTitleWindow";
+import { useSelector } from 'react-redux';
 
-export function GeneralInformation({ month, totalMonth }) {
+export function GeneralInformation() {
+    const month = useSelector(state => state.months.defaultMonth);
+    const totalMonth = useSelector(state => state.months.totalMonth);
     const underLimit = totalMonth > 1505;
 
     const style = {

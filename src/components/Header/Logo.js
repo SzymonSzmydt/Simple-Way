@@ -4,7 +4,7 @@ export function Logo() {
     const navigate = useNavigate();
 
     return (
-        <div className="logo" onClick={() => navigate("/home", true)} >
+        <div className="logo" onClick={() => navigate("/home")} >
             Simple Way
         </div>
     )

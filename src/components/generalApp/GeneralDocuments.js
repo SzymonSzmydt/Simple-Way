@@ -2,16 +2,21 @@ import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
 import {LoadingSpinner} from "../LoadingSpinner";
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
+import { totalMonth } from '../../redux/monthSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
-export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth, setDocuments }) => {
-    const documentsKeys = documents.length > 0 ? Object.keys(documents[0]) : [];
+export const GeneralDocuments = () => {
+    const dispatch = useDispatch();
+    const documents = useSelector(state => state.document.data);
+    const keys = useSelector(state => state.document.keys);
+    const choiceMonth = useSelector(state => state.months.defaultMonth);
 
-    const isMonthInDocuments = documentsKeys.includes(choiceMonth);
+    const isMonthInDocuments = keys.includes(choiceMonth);
     const documentsValues = isMonthInDocuments ?
-        Object.values( documents[0][choiceMonth]) : { date: 0, sum: 0, info: 0 };
+        Object.values( documents[choiceMonth]) : [{date: 0, sum: 0, total: 0}];
     let total = 0;
-    const data = isMonthInDocuments ? documentsValues.map( ( {date, sum}, index ) =>
+    const data = documentsValues.length > 0 ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
                 key={date} 
                 date={date} 
@@ -19,14 +24,11 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth, setDoc
                 total={total += parseFloat(sum)} 
                 index={index}
                 choiceMonth={choiceMonth} 
-                documents={documents[0]}
-                setDocuments={setDocuments}
-                documentsKeys={documentsKeys}
      />) : null;
-     const sumOfMonth = useMemo(()=> isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0);
+     const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
      
      useEffect(()=> {  
-        setTotalMonth(sumOfMonth);
+        dispatch(totalMonth(sumOfMonth));
      }, [sumOfMonth]);
 
     return (
@@ -42,7 +44,7 @@ export const GeneralDocuments = ({ documents, setTotalMonth, choiceMonth, setDoc
                     </tr>
                 </thead>
                 <tbody>
-                { documents.length > 0 ? data : <tr><td colSpan="6"><LoadingSpinner/></td></tr> }
+                { data.length > 0 ? data : <tr><td colSpan="6"><LoadingSpinner/></td></tr> }
                 </tbody>
             </table>
         </WindowContainer>

@@ -2,10 +2,12 @@ import {doc, updateDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 
-
-export function DocumentsLists({ setDocuments, date, sum, index, documents, choiceMonth, total, documentsKeys }) {
+export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
     const { user } = useUserAuth();
+    const documents = useSelector(state => state.document.data);
+    const keys = useSelector(state => state.document.keys);
 
     const saveDataToFirestore = async () => {
         const year = new Date().getFullYear().toLocaleString();
@@ -19,8 +21,8 @@ export function DocumentsLists({ setDocuments, date, sum, index, documents, choi
     }
 
     const handleDeleteClick = useCallback((index) => {
-        if (documents[choiceMonth][documentsKeys[index]]) {
-            delete documents[choiceMonth][documentsKeys[index]];
+        if (documents[choiceMonth][keys[index]]) {
+            delete documents[choiceMonth][keys[index]];
         }
     }, [documents, choiceMonth]);
 

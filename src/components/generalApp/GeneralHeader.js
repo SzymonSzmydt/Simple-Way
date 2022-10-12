@@ -2,16 +2,12 @@ import {WindowContainer} from "../windows/WindowContainer";
 import {GeneralInformation} from "./GeneralInformation";
 import {HeaderTopSection} from "./HeaderTopSection";
 
-export function GeneralHeader({ setAddProductButton, setChoiceMonth, choiceMonth, totalMonth, userData }) {
+export function GeneralHeader({ setAddProductButton, userData }) {
 
     return (
         <WindowContainer>
-            <HeaderTopSection 
-                setChoiceMonth={setChoiceMonth} 
-                setAddProductButton={setAddProductButton}
-                userData={userData}
-                 />
-            <GeneralInformation month={choiceMonth} totalMonth={totalMonth}/>
+            <HeaderTopSection setAddProductButton={setAddProductButton} />
+            <GeneralInformation />
         </WindowContainer>
     )
 }

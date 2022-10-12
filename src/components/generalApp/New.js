@@ -6,9 +6,10 @@ import {WindowContainer} from "../windows/WindowContainer";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
+import { useSelector } from 'react-redux';
 
-export function New({ setAddProductButton, documents, setDocuments }) {
-    const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+export function New({ setAddProductButton }) {
+    const monthsText = useSelector(state => state.months.month);
     const [ products, setProducts ] = useState({date: '', sum: ''});
 
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
@@ -47,15 +48,6 @@ export function New({ setAddProductButton, documents, setDocuments }) {
         return setIsValid(false)
     }, [products, dayAfter, selectedMonth, setAddProductButton, user.email, year]);
 
-    const [ newState, setNewState ] = useState({});
-
-    const saveRecords = useCallback( () => {  
-        setDocuments(state => ([{
-            ...state,  
-            [selectedMonth] : { [dayAfter] : products }
-        }]));
-        console.log("po zapisaniu: ", documents)
-    }, [selectedMonth, dayAfter, products, setDocuments]);
 
     const cancel = () => {
         setAddProductButton(false);
@@ -75,7 +67,7 @@ export function New({ setAddProductButton, documents, setDocuments }) {
                         </label>
                     </form>
                     <div className="bottom-margin">
-                        <SmallButton name={"Zapisz"} onClick={ saveRecords }/>
+                        <SmallButton name={"Zapisz"} />
                         <SmallButton name={"Anuluj"} onClick={ cancel }/>
                     </div>
                 </div>

@@ -1,18 +1,15 @@
 import "./css/monthSelect.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { choiceMonth } from '../../redux/monthSlice';
 
-const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
-const monthDigit = new Date().getMonth().toLocaleString();
-const defaultMonth = monthsText[monthDigit];
-
-export function MonthSelect( {setChoiceMonth} ) {
-
-    const handleSelect = (e) => {
-        setChoiceMonth(e);
-    }
+export function MonthSelect() {
+    const dispatch = useDispatch();
+    const defaultMonth = useSelector(state => state.months.defaultMonth);
+    const monthsText = useSelector(state => state.months.month)
 
     return (
         <form className="monthSelect">
-            <select onChange={(e)=> handleSelect(e.target.value)} defaultValue={defaultMonth}>
+            <select onChange={(e)=> dispatch(choiceMonth(e.target.value))} defaultValue={defaultMonth}>
                 { monthsText.map( e => 
                     <option key={e} value={e}> 
                         { e.replace(e.charAt(0), e.charAt(0).toUpperCase()) } 

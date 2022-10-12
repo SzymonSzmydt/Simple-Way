@@ -90,7 +90,7 @@ export function LoginWindow() {
                 <BigButton type={"Submit"} name={"Zaloguj się"} />
             </form>
             <div className="line" />
-            <GoogleButton className="btn" onClick={() => handleGoogleSignIn} />
+            <GoogleButton className="btn" onClick={handleGoogleSignIn} />
 
             <div className="login-footer">
                 Nie masz konta ?

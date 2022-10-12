@@ -4,7 +4,7 @@ export const LogInButton = () => {
     const navigate = useNavigate();
 
     const handleLogOut = async () => {
-        navigate("/login", { replace: true });
+        navigate("/login");
     }
 
     return (

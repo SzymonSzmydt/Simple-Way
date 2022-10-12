@@ -1,4 +1,4 @@
-import {Header} from "./Header/Header";
+import {Header} from "./header/Header";
 import {UserAuthContextProvider} from "../context/UserAuthContext";
 import {Home} from "./home/Home";
 import {MainApp} from "./MainApp";
