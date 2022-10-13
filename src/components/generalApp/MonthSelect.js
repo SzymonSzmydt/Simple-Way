@@ -1,11 +1,11 @@
 import "./css/monthSelect.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { choiceMonth } from '../../redux/monthSlice';
+import { choiceMonth } from '../../redux/documentsSlice';
 
 export function MonthSelect() {
     const dispatch = useDispatch();
-    const defaultMonth = useSelector(state => state.months.defaultMonth);
-    const monthsText = useSelector(state => state.months.month)
+    const defaultMonth = useSelector(state => state.document.defaultMonth);
+    const monthsText = useSelector(state => state.document.month)
 
     return (
         <form className="monthSelect">

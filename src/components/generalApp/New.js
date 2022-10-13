@@ -9,7 +9,7 @@ import {useUserAuth} from "../../context/UserAuthContext";
 import { useSelector } from 'react-redux';
 
 export function New({ setAddProductButton }) {
-    const monthsText = useSelector(state => state.months.month);
+    const monthsText = useSelector(state => state.document.month);
     const [ products, setProducts ] = useState({date: '', sum: ''});
 
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);

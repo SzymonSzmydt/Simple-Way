@@ -55,6 +55,7 @@ export function MainApp() {
 
     useEffect( () => {
         uploadUserData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const year = new Date().getFullYear().toLocaleString();
@@ -70,10 +71,11 @@ export function MainApp() {
         } else {
             console.log("No such document!");
         }
-    }, [user.email, year]);
+    }, [user.email, year, reduxDispatch]);
 
     useEffect(() => {
         fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]);
 
     return (

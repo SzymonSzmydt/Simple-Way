@@ -1,13 +1,15 @@
 import {doc, updateDoc} from "firebase/firestore";
 import {db} from "../../context/firebase";
 import {useUserAuth} from "../../context/UserAuthContext";
+import { reduxData } from "./../../redux/documentsSlice";
 import { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
     const { user } = useUserAuth();
-    const documents = useSelector(state => state.document.data);
-    const keys = useSelector(state => state.document.keys);
+    const dispatch = useDispatch();
+    const reduxFetchedData = useSelector(state => state.document.data);
+    const documents = JSON.parse(JSON.stringify(reduxFetchedData));
 
     const saveDataToFirestore = async () => {
         const year = new Date().getFullYear().toLocaleString();
@@ -20,11 +22,14 @@ export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
         }
     }
 
-    const handleDeleteClick = useCallback((index) => {
-        if (documents[choiceMonth][keys[index]]) {
-            delete documents[choiceMonth][keys[index]];
+    const handleDeleteClick = useCallback((item) => {
+        if (documents[choiceMonth][item]) {
+            delete documents[choiceMonth][item];
+            dispatch(reduxData(documents));
         }
-    }, [documents, choiceMonth]);
+        else return console.log("Brak danych do usunięcia ");
+    }, [documents, choiceMonth, dispatch]);
+    console.log("documents ", documents[choiceMonth]);
 
     return (
                 <tr>
@@ -33,7 +38,7 @@ export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
                     <td className="col"> { sum + " zł" } </td>
                     <td className="col"> { total.toFixed(2) + " zł" } </td>
                     <td className="col">
-                        <span className="material-symbols-outlined delete-icon" onClick={(e)=> handleDeleteClick( index ) }>delete</span>
+                        <span className="material-symbols-outlined delete-icon" onClick={()=> handleDeleteClick( date.slice(-2) ) }>delete</span>
                     </td>
                 </tr>
     )

@@ -1,22 +1,21 @@
 import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
-import {LoadingSpinner} from "../LoadingSpinner";
 import { useEffect } from 'react';
-import { totalMonth } from '../../redux/monthSlice';
+import { totalMonth } from '../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 export const GeneralDocuments = () => {
     const dispatch = useDispatch();
     const documents = useSelector(state => state.document.data);
     const keys = useSelector(state => state.document.keys);
-    const choiceMonth = useSelector(state => state.months.defaultMonth);
+    const choiceMonth = useSelector(state => state.document.defaultMonth);
 
     const isMonthInDocuments = keys.includes(choiceMonth);
     const documentsValues = isMonthInDocuments ?
-        Object.values( documents[choiceMonth]) : [{date: 0, sum: 0, total: 0}];
+        Object.values( documents[choiceMonth]) : null;
     let total = 0;
-    const data = documentsValues.length > 0 ? documentsValues.map( ( {date, sum}, index ) =>
+    const data = documentsValues ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
                 key={date} 
                 date={date} 
@@ -29,6 +28,7 @@ export const GeneralDocuments = () => {
      
      useEffect(()=> {  
         dispatch(totalMonth(sumOfMonth));
+     // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [sumOfMonth]);
 
     return (
@@ -44,7 +44,7 @@ export const GeneralDocuments = () => {
                     </tr>
                 </thead>
                 <tbody>
-                { data.length > 0 ? data : <tr><td colSpan="6"><LoadingSpinner/></td></tr> }
+                { data ? data : <tr><td colSpan="6"> { null } </td></tr> }
                 </tbody>
             </table>
         </WindowContainer>
