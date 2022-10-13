@@ -6,7 +6,7 @@ import {RegisterWindow} from "./login/RegisterWindow";
 import {LoginWindow} from "./login/LoginWindow";
 import {AddSeller} from "./seller/AddSeller";
 import {General} from "./generalApp/General";
-import {Routes, Route, Link} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
 
 export function App() {

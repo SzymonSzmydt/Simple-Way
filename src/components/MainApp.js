@@ -8,6 +8,7 @@ import { General } from './generalApp/General';
 import { AddSeller } from './seller/AddSeller';
 import { reduxData, reduxKeys } from './../redux/documentsSlice';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const initialState = {
     userData: {},
@@ -35,6 +36,7 @@ export function MainApp() {
     const [ state, dispatch ] = useReducer(reducer, initialState);
     const { userData, isLoading } = state;
     const { user } = useUserAuth();
+    const navigate = useNavigate();
     const reduxDispatch = useDispatch();
 
     const uploadUserData = useCallback(async () => {
@@ -49,9 +51,9 @@ export function MainApp() {
                 type: 'loading', payload: true
             });
         } else {
-            console.log("No such document!");
+            navigate("/add");
         }
-    }, [user.email]);
+    }, [navigate, user.email]);
 
     useEffect( () => {
         uploadUserData();
@@ -65,11 +67,9 @@ export function MainApp() {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
             reduxDispatch( reduxData(docSnap.data()) );
             reduxDispatch( reduxKeys(docSnap.data()) );
         } else {
-            console.log("No such document!");
         }
     }, [user.email, year, reduxDispatch]);
 

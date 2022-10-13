@@ -6,7 +6,7 @@
 .new__label {
     display: flex;
     flex-direction: column;
-
+    padding: 0 1rem;
     text-align: center;
 }
 
