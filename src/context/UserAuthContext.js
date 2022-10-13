@@ -1,18 +1,20 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {auth} from "./firebase";
+import { useNavigate } from 'react-router-dom';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
     GoogleAuthProvider,
-    signInWithPopup
+    signInWithRedirect
 } from 'firebase/auth';
 
 const userAuthContext = createContext({});
 
 export function UserAuthContextProvider({ children }) {
     const [ user, setUser ] = useState({});
+    const navigate = useNavigate();  
 
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -28,12 +30,13 @@ export function UserAuthContextProvider({ children }) {
 
     function googleSignIn() {
         const googleAuthProvider = new GoogleAuthProvider();
-        return signInWithPopup(auth, googleAuthProvider);
+        return signInWithRedirect(auth, googleAuthProvider);
     }
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
+            navigate("/application");
         });
         return () => unSubscribe();
     }, []);

@@ -1,9 +1,10 @@
 import "./css/loginWindow.css";
-import {useReducer} from "react";
+import {useReducer, useState, useEffect, useCallback} from "react";
 import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
+import { LoadingSpinner } from './../LoadingSpinner';
 
 const initialState = {
     email: '',
@@ -43,6 +44,18 @@ export function LoginWindow() {
 
     const { email, password, error } = state;
     const { logIn, googleSignIn } = useUserAuth();
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const onLoadSesionStorage = () => {
+        const data = sessionStorage.getItem("loading");
+        if (data) {
+            setIsLoading(true);
+        }
+    }
+
+    useEffect(() => {     
+      onLoadSesionStorage()
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,22 +77,27 @@ export function LoginWindow() {
         }
     }
 
-    const handleGoogleSignIn = async (e) => {
-        e.preventDefault();
-        dispatch({ type: 'login' });
-
+    const handleGoogleClick = useCallback(async() => {
         try {
-            await googleSignIn();
-            navigate("/application");
+            await googleSignIn();     
         } catch (err) {
-            console.log(err);
+            console.log( err.message);
             dispatch({ type: 'error', playload: err.message })
         }
-    }
+    }, [googleSignIn]);  
+
+    const redirect = useCallback((e) => {
+        e.preventDefault();
+        dispatch({ type: 'login' });
+        window.sessionStorage.setItem('loading', "Simple Way");
+        setIsLoading(true);
+        handleGoogleClick();
+    }, [handleGoogleClick]); 
 
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     return (
+        !isLoading ?
         <div className="login-window" >
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
@@ -90,12 +108,12 @@ export function LoginWindow() {
                 <BigButton type={"Submit"} name={"Zaloguj się"} />
             </form>
             <div className="line" />
-            <GoogleButton className="btn" onClick={handleGoogleSignIn} />
+            <GoogleButton className="btn" onClick={redirect} />
 
             <div className="login-footer">
                 Nie masz konta ?
                 <Link to="/register"> Zarejestruj się! </Link>
             </div>
-        </div>
+        </div> : <LoadingSpinner/>
     )
 }

@@ -53,6 +53,7 @@ export function MainApp() {
         } else {
             navigate("/add");
         }
+        window.sessionStorage.removeItem("loading");
     }, [navigate, user.email]);
 
     useEffect( () => {
