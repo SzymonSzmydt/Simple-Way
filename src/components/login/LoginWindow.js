@@ -66,7 +66,7 @@ export function LoginWindow() {
 
     useEffect(()=> {
         if (user) {
-            navigate("/application");  
+            navigate("/");  
         }
     }, [user])
 

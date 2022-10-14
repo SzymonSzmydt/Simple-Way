@@ -10,6 +10,7 @@ export function LoadingSpinner() {
             navigation("/application");
         }, 10000);
         return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const [ counter, setCounter ] = useState(6);
@@ -23,6 +24,7 @@ export function LoadingSpinner() {
             navigation("/");
             }
         return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [counter]);
 
     return (
