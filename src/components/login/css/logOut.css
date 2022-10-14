@@ -1,21 +1,27 @@
-.logout {
-    cursor: pointer;
-
-    font-size: 1.75rem;
-
-    margin-right: 1.25rem;
-}
-
-.logout:hover {
-    color: var(--color-secondary);
-}
-
 .login {
     cursor: pointer;
-
-    font-size: 1rem;
 }
 
-.login:hover {
-    color: var(--color-secondary);
+.symbol {
+    cursor: pointer;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 1rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: 
+        invert(100%) 
+        sepia(0%) 
+        saturate(0%) 
+        hue-rotate(102deg) 
+        brightness(107%) 
+        contrast(100%);
+}
+
+.symbol__logout {
+    background-image: url('../../../../public/assets/logout.png');
+}
+
+.symbol__login {
+    background-image: url('../../../../public/assets/login.png');
 }

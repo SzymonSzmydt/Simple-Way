@@ -9,9 +9,8 @@ export const LogInButton = () => {
 
     return (
         <>
-            <span className="material-symbols-outlined logout" onClick={handleLogOut}> login </span>
+            <div className="symbol symbol__login" onClick={handleLogOut}/>
             <span className="login" onClick={handleLogOut}> Zaloguj się </span>
         </>
-
     )
 }

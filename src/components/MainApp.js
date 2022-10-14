@@ -61,9 +61,8 @@ export function MainApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const year = new Date().getFullYear().toLocaleString();
-
     const fetchData = useCallback(async () => {
+        const year = new Date().getFullYear().toLocaleString();
         const docRef = doc(db, user.email, year);
         const docSnap = await getDoc(docRef);
 
@@ -71,8 +70,9 @@ export function MainApp() {
             reduxDispatch( reduxData(docSnap.data()) );
             reduxDispatch( reduxKeys(docSnap.data()) );
         } else {
+            console.error("Dane nie zostały wczytane!");
         }
-    }, [user.email, year, reduxDispatch]);
+    }, [user.email, reduxDispatch]);
 
     useEffect(() => {
         fetchData();

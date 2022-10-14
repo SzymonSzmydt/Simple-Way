@@ -7,8 +7,8 @@ export function LoadingSpinner() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            navigation("/application", true);
-        }, 6000);
+            navigation("/application");
+        }, 10000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -20,7 +20,7 @@ export function LoadingSpinner() {
         }, 1000);
 
         if (counter < 0) {
-            navigation("/home", true);
+            navigation("/");
             }
         return () => clearTimeout(timer);
     }, [counter]);

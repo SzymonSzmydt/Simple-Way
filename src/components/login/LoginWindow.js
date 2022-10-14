@@ -1,10 +1,9 @@
 import "./css/loginWindow.css";
-import {useReducer, useState, useEffect, useCallback} from "react";
+import {useReducer, useCallback, useEffect} from "react";
 import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
-import { LoadingSpinner } from './../LoadingSpinner';
 
 const initialState = {
     email: '',
@@ -43,19 +42,7 @@ export function LoginWindow() {
     const [ state, dispatch ] = useReducer(loginReducer, initialState);
 
     const { email, password, error } = state;
-    const { logIn, googleSignIn } = useUserAuth();
-    const [ isLoading, setIsLoading ] = useState(false);
-
-    const onLoadSesionStorage = () => {
-        const data = sessionStorage.getItem("loading");
-        if (data) {
-            setIsLoading(true);
-        }
-    }
-
-    useEffect(() => {     
-      onLoadSesionStorage()
-    }, []);
+    const { logIn, googleSignIn, user } = useUserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,9 +64,15 @@ export function LoginWindow() {
         }
     }
 
+    useEffect(()=> {
+        if (user) {
+            navigate("/application");  
+        }
+    }, [user])
+
     const handleGoogleClick = useCallback(async() => {
         try {
-            await googleSignIn();     
+            await googleSignIn();   
         } catch (err) {
             console.log( err.message);
             dispatch({ type: 'error', playload: err.message })
@@ -89,15 +82,12 @@ export function LoginWindow() {
     const redirect = useCallback((e) => {
         e.preventDefault();
         dispatch({ type: 'login' });
-        window.sessionStorage.setItem('loading', "Simple Way");
-        setIsLoading(true);
         handleGoogleClick();
     }, [handleGoogleClick]); 
 
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     return (
-        !isLoading ?
         <div className="login-window" >
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
@@ -114,6 +104,6 @@ export function LoginWindow() {
                 Nie masz konta ?
                 <Link to="/register"> Zarejestruj się! </Link>
             </div>
-        </div> : <LoadingSpinner/>
+        </div>
     )
 }
