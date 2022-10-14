@@ -4,6 +4,7 @@ import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
+import { LoadingSpinner } from './../LoadingSpinner';
 
 const initialState = {
     email: '',
@@ -31,6 +32,12 @@ function loginReducer(state, action) {
                 error: action.playload
             }
         }
+        case 'isLoading': {
+            return {
+                ...state,
+                isLoading: action.payload
+            }
+        }
         default: {
             throw new Error(`Unknown action type: ${action.type}`);
         }
@@ -42,7 +49,7 @@ export function LoginWindow() {
     const [ state, dispatch ] = useReducer(loginReducer, initialState);
 
     const { email, password, error } = state;
-    const { logIn, googleSignIn, user } = useUserAuth();
+    const { logIn, googleSignIn } = useUserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,13 +71,6 @@ export function LoginWindow() {
         }
     }
 
-    useEffect(()=> {
-        if (user) {
-            navigate("/");  
-        }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user])
-
     const handleGoogleClick = useCallback(async() => {
         try {
             await googleSignIn();   
@@ -80,8 +80,20 @@ export function LoginWindow() {
         }
     }, [googleSignIn]);  
 
+    const onLoadSesionStorage = () => {
+        const data = sessionStorage.getItem("loading");
+        if (data) {
+            dispatch({type: 'isLoading', payload: true});
+        }
+    }
+
+    useEffect(() => {     
+      onLoadSesionStorage()
+    }, []);
+
     const redirect = useCallback((e) => {
         e.preventDefault();
+        window.sessionStorage.setItem('loading', "Simple Way");
         dispatch({ type: 'login' });
         handleGoogleClick();
     }, [handleGoogleClick]); 
@@ -89,6 +101,7 @@ export function LoginWindow() {
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     return (
+        !state.isLoading ?
         <div className="login-window" >
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
@@ -105,6 +118,6 @@ export function LoginWindow() {
                 Nie masz konta ?
                 <Link to="/register"> Zarejestruj się! </Link>
             </div>
-        </div>
+        </div> : <LoadingSpinner/>
     )
 }

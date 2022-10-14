@@ -28,7 +28,7 @@ export function LoadingSpinner() {
     }, [counter]);
 
     return (
-        <SmallTitleWindow windowTitle={`Ładowanie danych - jeżeli dane nie istnieją zostaniesz przekierowany do wyboru użytkownika za ${counter}`}>
+        <SmallTitleWindow windowTitle={`Ładowanie danych - ${counter}`}>
             <div className="lds-ring">
                 <div></div>
                 <div></div>
