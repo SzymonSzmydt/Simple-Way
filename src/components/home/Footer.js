@@ -5,12 +5,12 @@ export function Footer() {
     return (
         <div className="home__header container home__footer">
             <div className="home__footer-box">
-                <section>
+                <a href="https://www.linkedin.com/in/szymon-szmydt-5b0992230/" target="_blank" rel="noreferrer">
                     <div className="symbol symbol__linkedin"/> LinkedIn
-                </section>
-                <section>
+                </a>
+                <a href="https://github.com/SzymonSzmydt" target="_blank" rel="noreferrer">
                     <div className="symbol symbol__gitHub"/> GitHub
-                </section>
+                </a>
                 <section>
                     Simple Way - Ewidencja działalności nierejestrowanej
                 </section>

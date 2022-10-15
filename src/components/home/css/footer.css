@@ -9,13 +9,24 @@
     margin: 2rem auto;
 }
 
-.home__footer-box > section {
+.home__footer-box > a {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1rem;
+
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--color-white);
+    transition: color 0.3s;
+}
+
+.home__footer-box > a:hover {
+    color: var(--color-green);
 }
 
 .home__footer-box > section:last-child {
+    padding: 0.5rem 0 0;
+    margin-bottom: -1rem;
     font-size: 0.8rem;
 }
