@@ -4,7 +4,6 @@ import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
-import { LoadingSpinner } from './../LoadingSpinner';
 
 const initialState = {
     email: '',
@@ -47,7 +46,6 @@ function loginReducer(state, action) {
 export function LoginWindow() {
     const navigate = useNavigate();
     const [ state, dispatch ] = useReducer(loginReducer, initialState);
-
     const { email, password, error } = state;
     const { logIn, googleSignIn } = useUserAuth();
 
@@ -71,15 +69,6 @@ export function LoginWindow() {
         }
     }
 
-    const handleGoogleClick = useCallback(async() => {
-        try {
-            await googleSignIn();   
-        } catch (err) {
-            console.log( err.message);
-            dispatch({ type: 'error', playload: err.message })
-        }
-    }, [googleSignIn]);  
-
     const onLoadSesionStorage = () => {
         const data = sessionStorage.getItem("loading");
         if (data) {
@@ -89,19 +78,27 @@ export function LoginWindow() {
 
     useEffect(() => {     
       onLoadSesionStorage()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const redirect = useCallback((e) => {
-        e.preventDefault();
+    const handleGoogleClick = useCallback(async() => {
+        try {
+            await googleSignIn();     
+        } catch (err) {
+            console.log( err.message);
+        }
+    }, [googleSignIn]);   
+
+    const redirect = useCallback(() => {
         window.sessionStorage.setItem('loading', "Simple Way");
         dispatch({ type: 'login' });
         handleGoogleClick();
+        navigate('/');
     }, [handleGoogleClick]); 
 
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 
     return (
-        !state.isLoading ?
         <div className="login-window" >
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>
             <form className="form" onSubmit={handleSubmit}>
@@ -118,6 +115,6 @@ export function LoginWindow() {
                 Nie masz konta ?
                 <Link to="/register"> Zarejestruj się! </Link>
             </div>
-        </div> : <LoadingSpinner/>
+        </div>
     )
 }

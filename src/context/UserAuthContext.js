@@ -1,6 +1,5 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {auth} from "./firebase";
-import { useNavigate } from 'react-router-dom';
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -14,7 +13,6 @@ const userAuthContext = createContext({});
 
 export function UserAuthContextProvider({ children }) {
     const [ user, setUser ] = useState({}); 
-    const navigate = useNavigate();  
 
     function signUp(email, password) {
         return createUserWithEmailAndPassword(auth, email, password);
@@ -36,7 +34,6 @@ export function UserAuthContextProvider({ children }) {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            navigate("/application");
         });
         return () => unSubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps

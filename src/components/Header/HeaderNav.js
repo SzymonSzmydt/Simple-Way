@@ -5,11 +5,12 @@ export function HeaderNav() {
 
     return (
         <div className="header__nav">
-            <Link to="/Home" className="header__nav-link">
-                <span className="material-symbols-outlined icon">home</span>
+            <Link to="/" className="header__nav-link">
+                <div className="symbol symbol__home"/>
             </Link>
             <Link to="/application" className="header__nav-link">
-                <span className="material-symbols-outlined icon">app_registration</span>
+                <div className="symbol symbol__app_registration"/>
+                <span className="header_nav-name">Rejestr</span>
             </Link>
         </div>
     )

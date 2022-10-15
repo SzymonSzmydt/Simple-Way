@@ -2,26 +2,18 @@
     cursor: pointer;
 }
 
-.symbol {
-    cursor: pointer;
-    width: 1.75rem;
-    height: 1.75rem;
-    margin-right: 1rem;
-    background-repeat: no-repeat;
-    background-size: cover;
-    filter: 
-        invert(100%) 
-        sepia(0%) 
-        saturate(0%) 
-        hue-rotate(102deg) 
-        brightness(107%) 
-        contrast(100%);
+.LogOut__user-email {
+    font-size: 1rem;
 }
 
-.symbol__logout {
-    background-image: url('../../../../public/assets/logout.png');
+@media screen and (max-width: 560px) {
+    .LogOut__user-email {
+        font-size: 0.8rem;
+    }
 }
 
-.symbol__login {
-    background-image: url('../../../../public/assets/login.png');
+@media screen and (max-width: 330px) {
+    .LogOut__user-email {
+        display: none;
+    }
 }

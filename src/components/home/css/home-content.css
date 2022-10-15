@@ -13,6 +13,19 @@
     border-radius: var(--radius);
 }
 
+@media screen and (max-width: 560px) {
+    .content-title {
+        padding: 1rem;
+    
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--color-secondary);
+    
+        background-color: #FFFFFF;
+        border-radius: var(--radius);
+    }
+}
+
 .content__title-context {
     font-weight: 500;
     font-size: 1.25rem;

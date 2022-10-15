@@ -1,6 +1,6 @@
 import './css/userName.css';
-import {LogOutButton} from "../login/logOut";
-import {LogInButton} from "../login/logIn";
+import {LogOutButton} from "../login/logOutButton";
+import {LogInButton} from "../login/logInButton";
 
 export const UserName = ({ user }) => {
 

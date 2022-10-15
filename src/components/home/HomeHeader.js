@@ -24,7 +24,7 @@ export function HomeHeader() {
                 <p>
                     Nie masz obowiązku rejestrować swojej działalności
                     (chyba, że musisz zostać podatnikiem VAT).
-                    Po prostu przygotuj swoją ofertę i zacznij działać.
+                    Po prostu przygotuj swoją ofertę i zacznij działać!
                     Pamiętaj jednak o obowiązkach, które na Tobie spoczywają, jeśli chcesz
                     skorzystać z działalności nierejestrowanej.
                 </p>

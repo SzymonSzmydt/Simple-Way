@@ -5,6 +5,8 @@ import "./css/logOut.css";
 export const LogOutButton = () => {
     const navigate = useNavigate();
     const { user, logOut } = useUserAuth();
+    let name = user ? user.email : false;
+    let indexOfMonkey = name ? name.indexOf('@') : null;
 
     const handleLogOut = async () => {
         try {
@@ -18,7 +20,7 @@ export const LogOutButton = () => {
     return (
         <>
             <div className="symbol symbol__logout" onClick={handleLogOut}/>
-            <span> { user.email } </span>
+            <span className="LogOut__user-email"> { name ? name.slice(0, indexOfMonkey) : null } </span>
         </>
 
     )

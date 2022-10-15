@@ -1,0 +1,21 @@
+.home__footer {
+    width: 100%;
+    margin-bottom: -1rem;
+    border-radius: var(--radius) var(--radius) 0 0; 
+    background-color: var(--color-secondary);
+}
+
+.home__footer-box {
+    margin: 2rem auto;
+}
+
+.home__footer-box > section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.home__footer-box > section:last-child {
+    font-size: 0.8rem;
+}
