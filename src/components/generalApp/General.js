@@ -4,6 +4,7 @@ import {Window} from "../windows/Window";
 import {GeneralHeader} from "./GeneralHeader";
 import {GeneralDocuments} from "./GeneralDocuments";
 import {New} from "./New";
+import { BarChart } from '../charts/BarChart';
 
 export function General() {
     const [ addProductButton, setAddProductButton ] = useState(false);
@@ -14,8 +15,9 @@ export function General() {
             : <GeneralHeader setAddProductButton={setAddProductButton} />;
     return (
         <Window>
-                { whenAddingNewProduct }
-                <GeneralDocuments />
+            <BarChart/>
+            { whenAddingNewProduct }
+            <GeneralDocuments />
         </Window>
     )
 }
