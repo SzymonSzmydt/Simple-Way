@@ -31,13 +31,13 @@ export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
     }, [documents, choiceMonth, dispatch, saveDataToFirestore]);
 
     return (
-                <tr>
-                    <td className="col"> { index + 1 } </td>
-                    <td className="col"> { date } </td>
-                    <td className="col"> { sum + " zł" } </td>
-                    <td className="col"> { total.toFixed(2) + " zł" } </td>
-                    <td className="col">
-                        <span className="material-symbols-outlined delete-icon" onClick={()=> handleDeleteClick( date.slice(-2) ) }>delete</span>
+                <tr className="tr__row">
+                    <td className="coll"> { index + 1 } </td>
+                    <td className="coll"> { date } </td>
+                    <td className="coll"> { sum + " zł" } </td>
+                    <td className="coll"> { total.toFixed(2) + " zł" } </td>
+                    <td className="coll">
+                        <div className="symbol symbol__delete delete-icon" onClick={()=> handleDeleteClick( date.slice(-2) ) } />
                     </td>
                 </tr>
     )

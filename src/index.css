@@ -113,3 +113,7 @@ body {
   background-image: url('../public/assets/github.svg');
 }
 
+.symbol__delete {
+  background-image: url('../public/assets/delete.png');
+}
+
