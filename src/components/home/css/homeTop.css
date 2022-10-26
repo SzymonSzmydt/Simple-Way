@@ -13,26 +13,6 @@
     }
 }
 
-.home-title {
-    text-align: center;
-
-    padding: 2rem 0;
-
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--color-secondary);
-
-    background-color: var(--color-third);
-    border-radius: var(--radius);
-}
-
-@media screen and (max-width: 911px) {
-    .home-title {
-        font-size: 1.25rem;
-        padding: 1.5rem 1rem;
-    }
-}
-
 .home__title-context {
     font-weight: 500;
     font-size: 1.25rem;

@@ -1,15 +1,12 @@
-import "./css/homeHeader.css";
+import "./css/homeTop.css";
 
-export function HomeHeader() {
+export function HomeTop() {
 
     return (
         <div className="home__header container">
-            <h1 className="home-title">
-                Ewidencja dla działalności nierejestrowanej
-            </h1>
             <div className="home__body">
                 <div className="section-left">
-                    <h2 className="home__title-context"> Warto wiedzieć</h2>
+                    <h2 className="home__title-context"> Co warto wiedzieć?</h2>
                     <p>Działalność nierejestrowana pozwala nam zarobić do 50% minimalnego
                         wynagrodzenia za pracę (w 2022 minimalne wynagrodzenie wynosi 3010 zł brutto,
                         co daje nam możliwość osiągnięcia przychodu 1505 zł).</p>

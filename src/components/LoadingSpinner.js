@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { SmallTitleWindow } from './windows/SmallTitleWindow';
+import { Spinner } from './Spinner';
 
 export function LoadingSpinner() {
     const navigate = useNavigate();
@@ -23,12 +24,7 @@ export function LoadingSpinner() {
 
     return (
         <SmallTitleWindow windowTitle={`Ładowanie danych - ${counter}`}>
-            <div className="lds-ring">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+            <Spinner/>
         </SmallTitleWindow>
     )
 }

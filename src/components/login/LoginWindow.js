@@ -1,14 +1,15 @@
 import "./css/loginWindow.css";
-import {useReducer, useCallback, useEffect} from "react";
+import {useReducer, useCallback} from "react";
 import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
 import {BigButton} from "../button/BigButton";
 
+
 const initialState = {
     email: '',
     password: '',
-    error: ''
+    error: '',
 }
 
 function loginReducer(state, action) {
@@ -19,22 +20,10 @@ function loginReducer(state, action) {
                 [action.field]: action.value
             }
         }
-        case 'login': {
-            return {
-            ...state,
-            error: ''
-            }
-        }
         case 'error': {
             return {
                 ...state,
                 error: action.playload
-            }
-        }
-        case 'isLoading': {
-            return {
-                ...state,
-                isLoading: action.payload
             }
         }
         default: {
@@ -51,7 +40,7 @@ export function LoginWindow() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch({ type: 'login' });
+        dispatch({ type: 'field' });
 
         if (email === "" || email.match(/.*\.\w{2,3}/g) === null){
             return dispatch({ type: 'error', playload: "Please Enter a Valid Email" });
@@ -69,18 +58,6 @@ export function LoginWindow() {
         }
     }
 
-    const onLoadSesionStorage = () => {
-        const data = sessionStorage.getItem("loading");
-        if (data) {
-            dispatch({type: 'isLoading', payload: true});
-        }
-    }
-
-    useEffect(() => {     
-      onLoadSesionStorage()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const handleGoogleClick = useCallback(async() => {
         try {
             await googleSignIn();     
@@ -91,10 +68,9 @@ export function LoginWindow() {
 
     const redirect = useCallback(() => {
         window.sessionStorage.setItem('loading', "Simple Way");
-        dispatch({ type: 'login' });
         handleGoogleClick();
         navigate('/');
-    }, [handleGoogleClick]); 
+    }, [handleGoogleClick, navigate]); 
 
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
 

@@ -18,12 +18,6 @@ function loginReducer(state, action) {
                 [action.field]: action.value
             }
         }
-        case 'login': {
-            return {
-            ...state,
-            error: ''
-            }
-        }
         case 'error': {
             return {
                 ...state,
@@ -45,12 +39,11 @@ export function RegisterWindow() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch({ type: 'login' });
-
+  
         if (email === "" || email.match(/.*\.\w{2,3}/g) === null){
             return dispatch({ type: 'error', playload: "Please Enter a Valid Email" });
           }
-        if (password.length < 7 || password.test(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/g) === null){
+        if (password.length < 7 || password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/)){
             return dispatch({ type: 'error', playload: "The password is too simply" });
         }
 

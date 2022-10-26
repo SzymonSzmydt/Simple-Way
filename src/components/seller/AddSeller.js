@@ -121,7 +121,7 @@ export function AddSeller() {
                                 placeholder="np. Kępno "/>
                         </label>
                         <BigButton type={"submit"} name={"Dodaj"} />
-                        <BigButton type={"reset"} onClick={()=> navigate("/application")} name={"Anuluj"} />
+                        <BigButton type={"reset"} onClick={()=> navigate("/")} name={"Anuluj"} />
                     </form>
                 </SmallTitleWindow>
             </BigWindowTitleInfo>

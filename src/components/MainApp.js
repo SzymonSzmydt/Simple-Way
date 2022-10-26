@@ -53,7 +53,6 @@ export function MainApp() {
         } else {
             navigate("/add");
         }
-        window.sessionStorage.removeItem("loading");
     }, [navigate, user.email]);
 
     useEffect( () => {
@@ -70,7 +69,7 @@ export function MainApp() {
             reduxDispatch( reduxData(docSnap.data()) );
             reduxDispatch( reduxKeys(docSnap.data()) );
         } else {
-            console.error("Dane nie zostały wczytane!");
+            console.log("Dane nie zostały wczytane, utwórz użytkownika");
         }
     }, [user.email, reduxDispatch]);
 
