@@ -11,7 +11,7 @@
   --color-white: #EEF4F5;
   --header-height: 3.5rem;
   --radius: 5px;
-  --font: 'Dosis', sans-serif;
+  --font: 'Inter', sans-serif;
 }
 
 body {
@@ -25,6 +25,10 @@ body {
 .container {
   margin: 0 auto;
   max-width: 57rem;
+}
+
+.container-large {
+  max-width: 120rem;
 }
 
 .mainOptionBtn {
