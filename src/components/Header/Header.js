@@ -8,7 +8,7 @@ export const Header = () => {
     const { user } = useUserAuth();
 
     return (
-        <header className="header">
+        <header className="header container-large">
             <UserName user={user}/>
             { user ? <HeaderNav /> : null }
             <Logo />
