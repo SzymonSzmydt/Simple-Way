@@ -11,13 +11,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export function New({ setAddProductButton }) {
     const monthsText = useSelector(state => state.document.month);
-    const reduxFetchedData = useSelector(state => state.document.data);
-    const documents = JSON.parse(JSON.stringify(reduxFetchedData));
+    const documents = useSelector(state => state.document.data);
     const [ products, setProducts ] = useState({date: '', sum: ''});
+    const [ data, setData ] = useState(documents);
     const dispatch = useDispatch();
-
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
-    let selectedMonth = monthsText[monthDigit - 1];
+    const selectedMonth = monthsText[monthDigit - 1];
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -46,18 +45,21 @@ export function New({ setAddProductButton }) {
                 console.error("Error adding document: ", e);
             }
     }, [products, dayAfter, selectedMonth, setAddProductButton, user.email, year]);
-    
+
     const saveRecords = useCallback( () => {  
         if (products.date.length === 10 && products.sum.length > 0) {
             setIsValid(true);
-            documents[selectedMonth][dayAfter] = {date: products.date, sum: products.sum};
-            dispatch(reduxData(documents));
+            setData( {...data, 
+                    [selectedMonth] : {
+                        [dayAfter] : {
+                            date: products.date, sum: products.sum
+                        }}});
+            dispatch(reduxData(data));
             saveDataToFirestore();
         }
         else return setIsValid(false)
 
-    }, [products, documents, selectedMonth, dayAfter, dispatch, saveDataToFirestore]);
-
+    }, [products, selectedMonth, dayAfter, dispatch, saveDataToFirestore, data]);
     return (
         <WindowContainer>
             <SmallTitleWindow style={style} windowTitle={ isValid ? "Nowy wpis rejestru sprzedaży" : "Pola niekompletne lub mają nieprawdłowe wartości" }>
