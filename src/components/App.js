@@ -1,6 +1,6 @@
 import {Header} from "../pages/header/Header";
 import {UserAuthContextProvider} from "../context/UserAuthContext";
-import {Home} from "./home/Home";
+import {Home} from "../pages/home/Home";
 import { Main } from "./Main";
 import {RegisterWindow} from "./login/RegisterWindow";
 import {LoginWindow} from "./login/LoginWindow";
