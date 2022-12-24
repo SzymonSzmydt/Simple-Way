@@ -1,22 +1,26 @@
 import "./css/new.css";
-import {SmallTitleWindow} from "../windows/SmallTitleWindow";
+import {SmallTitleWindow} from "../../windows/SmallTitleWindow";
 import {useState, useCallback} from "react";
-import {SmallButton} from "../button/SmallButton";
-import {WindowContainer} from "../windows/WindowContainer";
+import {SmallButton} from "../../button/SmallButton";
+import {WindowContainer} from "../../windows/WindowContainer";
 import {doc, setDoc} from "firebase/firestore";
-import {db} from "../../context/firebase";
-import {useUserAuth} from "../../context/UserAuthContext";
-import { reduxData } from './../../redux/documentsSlice';
+import {db} from "../../../context/firebase";
+import {useUserAuth} from "../../../context/UserAuthContext";
+import { reduxData } from './../../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const year = new Date().getFullYear().toLocaleString();
 
 export function New({ setAddProductButton }) {
+    const { user } = useUserAuth();
+    const dispatch = useDispatch();
+
     const monthsText = useSelector(state => state.document.month);
     const documents = useSelector(state => state.document.data);
+
     const [ products, setProducts ] = useState({date: '', sum: ''});
     const [ data, setData ] = useState(documents);
-    const dispatch = useDispatch();
+
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
     const selectedMonth = monthsText[monthDigit - 1];
 
@@ -32,8 +36,6 @@ export function New({ setAddProductButton }) {
         backgroundColor: !isValid ? "#B07483" : "",
         color: !isValid ? "white" : ""
     }
-
-    const { user } = useUserAuth();
 
     const dayBefore = products.date.slice(-2);
     const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;

@@ -6,7 +6,7 @@ import {GeneralDocuments} from "./GeneralDocuments";
 import {New} from "./New";
 import { BarChart } from '../charts/BarChart';
 
-export function General() {
+export function Record() {
     const [ addProductButton, setAddProductButton ] = useState(false);
 
     const whenAddingNewProduct =

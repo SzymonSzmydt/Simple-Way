@@ -2,10 +2,10 @@ import {Header} from "../pages/header/Header";
 import {UserAuthContextProvider} from "../context/UserAuthContext";
 import {Home} from "../pages/home/Home";
 import { Main } from "./Main";
-import {RegisterWindow} from "./login/RegisterWindow";
-import {LoginWindow} from "./login/LoginWindow";
+import {RegisterWindow} from "../pages/login/RegisterWindow";
+import {LoginWindow} from "../pages/login/LoginWindow";
 import {AddSeller} from "./ui/seller/AddSeller";
-import {General} from "./generalApp/General";
+import {Record} from "./ui/record/Record";
 import {Routes, Route} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
 
@@ -30,7 +30,7 @@ export function App() {
                 } />
                 <Route path="/application/general" element={
                     <ProtectedRoute>
-                        <General />
+                        <Record />
                     </ProtectedRoute>
                 } />
                 <Route path="*" element={ <Home /> } />
