@@ -1,7 +1,7 @@
 import {Header} from "./header/Header";
 import {UserAuthContextProvider} from "../context/UserAuthContext";
 import {Home} from "./home/Home";
-import {MainApp} from "./MainApp";
+import {Main} from "./Main";
 import {RegisterWindow} from "./login/RegisterWindow";
 import {LoginWindow} from "./login/LoginWindow";
 import {AddSeller} from "./seller/AddSeller";
@@ -10,7 +10,6 @@ import {Routes, Route} from "react-router-dom";
 import {ProtectedRoute} from "./ProtectedRoute";
 
 export function App() {
-
   return (
     <div className="app">
         <UserAuthContextProvider>
