@@ -1,7 +1,7 @@
 import "./css/generalDokuments.css";
 import {WindowContainer} from "../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { totalMonth } from '../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -12,9 +12,9 @@ export const GeneralDocuments = () => {
     const choiceMonth = useSelector(state => state.document.defaultMonth);
 
     const isMonthInDocuments = keys.includes(choiceMonth);
-    const documentsValues = isMonthInDocuments ?
-        Object.values( documents[choiceMonth]) : null;
     let total = 0;
+    const [ documentsValues ] = useState( Object.values( documents[choiceMonth]) );
+
     const data = documentsValues ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
                 key={date} 

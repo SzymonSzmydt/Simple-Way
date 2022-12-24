@@ -9,6 +9,8 @@ import {useUserAuth} from "../../context/UserAuthContext";
 import { reduxData } from './../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
+const year = new Date().getFullYear().toLocaleString();
+
 export function New({ setAddProductButton }) {
     const monthsText = useSelector(state => state.document.month);
     const documents = useSelector(state => state.document.data);
@@ -32,7 +34,7 @@ export function New({ setAddProductButton }) {
     }
 
     const { user } = useUserAuth();
-    const year = new Date().getFullYear().toLocaleString();
+
     const dayBefore = products.date.slice(-2);
     const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
 
@@ -45,7 +47,6 @@ export function New({ setAddProductButton }) {
                 console.error("Error adding document: ", e);
             }
     }, [products, dayAfter, selectedMonth, setAddProductButton, user.email, year]);
-
     const saveRecords = useCallback( () => {  
         if (products.date.length === 10 && products.sum.length > 0) {
             setIsValid(true);
@@ -54,11 +55,9 @@ export function New({ setAddProductButton }) {
                         [dayAfter] : {
                             date: products.date, sum: products.sum
                         }}});
-            dispatch(reduxData(data));
             saveDataToFirestore();
         }
         else return setIsValid(false)
-
     }, [products, selectedMonth, dayAfter, dispatch, saveDataToFirestore, data]);
     return (
         <WindowContainer>

@@ -4,7 +4,6 @@ export function DeleteAsk({ setToDelete }) {
 
     const deletingRecord = () => {
     }
-
     return (
         <section className="mainOptionBtn">
             <SmallButton name={"Tak"} onClick={deletingRecord} />

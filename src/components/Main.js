@@ -4,7 +4,7 @@ import {useEffect, useReducer, useCallback} from "react";
 import {useUserAuth} from "../context/UserAuthContext";
 import {Window} from "./windows/Window";
 import {LoadingSpinner} from "./LoadingSpinner";
-import { General } from './generalApp/General';
+import { Record } from './ui/record/Record';
 import { AddSeller } from './seller/AddSeller';
 import { reduxData, reduxKeys } from './../redux/documentsSlice';
 import { useDispatch } from 'react-redux';
@@ -32,7 +32,7 @@ function reducer(state, action) {
     }
 }
 
-export function MainApp() {
+export function Main() {
     const [ state, dispatch ] = useReducer(reducer, initialState);
     const { userData, isLoading } = state;
     const { user } = useUserAuth();
@@ -81,7 +81,7 @@ export function MainApp() {
     return (
             <Window>
                 { isLoading ? 
-                userData ? <General/> : 
+                userData ? <Record /> : 
                 <AddSeller/>
                  : <LoadingSpinner /> }
             </Window>
