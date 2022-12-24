@@ -5,7 +5,7 @@ import {useUserAuth} from "../context/UserAuthContext";
 import {Window} from "./windows/Window";
 import {LoadingSpinner} from "./LoadingSpinner";
 import { Record } from './ui/record/Record';
-import { AddSeller } from './seller/AddSeller';
+import { AddSeller } from './ui/seller/AddSeller';
 import { reduxData, reduxKeys } from './../redux/documentsSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
