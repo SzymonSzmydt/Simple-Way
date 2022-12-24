@@ -1,4 +1,4 @@
-import {Window} from "../windows/Window";
+import {Window} from "../../components/windows/Window";
 import {HomeTop} from "./HomeTop";
 import {HomeContent} from "./HomeContent";
 import { Footer } from './Footer';
@@ -6,7 +6,7 @@ import { HomeIntro } from './HomeIntro';
 import { useEffect } from 'react';
 import { useUserAuth } from '../../context/UserAuthContext';
 import { useState } from 'react';
-import { Spinner } from './../Spinner';
+import { Spinner } from '../../components/Spinner';
 
 const style = {
     display: "flex",
@@ -19,18 +19,14 @@ const style = {
 export function Home() {
     const [isLoading, setIsLoading ] = useState(false);
     const { user } = useUserAuth();
-
     useEffect(()=> {
         const data = window.sessionStorage.getItem('loading');
-        if (data) {
-            setIsLoading(true);
-        }
+        if (data) setIsLoading(true);
         if (user) {
             window.sessionStorage.removeItem("loading");
             setIsLoading(false);
         }
     }, []);
-
     return (
         !isLoading ? 
         <>

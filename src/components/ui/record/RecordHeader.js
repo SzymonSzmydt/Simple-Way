@@ -1,13 +1,11 @@
-import {WindowContainer} from "../windows/WindowContainer";
-import {GeneralInformation} from "./GeneralInformation";
+import {WindowContainer} from "../../windows/WindowContainer";
+import {RecordInformation} from "./RecordInformation";
 import {HeaderTopSection} from "./HeaderTopSection";
-
-export function GeneralHeader({ setAddProductButton, userData }) {
-
+export function RecordHeader({ setAddProductButton, userData }) {
     return (
         <WindowContainer>
             <HeaderTopSection setAddProductButton={setAddProductButton} />
-            <GeneralInformation />
+            <RecordInformation />
         </WindowContainer>
     )
 }

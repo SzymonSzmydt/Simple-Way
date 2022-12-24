@@ -2,13 +2,12 @@ import "./css/addSeller.css";
 import {useReducer} from "react";
 import {useNavigate} from "react-router-dom";
 import {setDoc, doc} from "firebase/firestore";
-import {db} from "../../context/firebase";
-import {useUserAuth} from "../../context/UserAuthContext";
-import {BigWindowTitleInfo} from "../windows/BigWindowTitleInfo";
-import {Window} from "../windows/Window";
-import {SmallTitleWindow} from "../windows/SmallTitleWindow";
-import {BigButton} from "../button/BigButton";
-
+import {db} from "../../../context/firebase";
+import {useUserAuth} from "../../../context/UserAuthContext";
+import {BigWindowTitleInfo} from "../../windows/BigWindowTitleInfo";
+import {Window} from "../../windows/Window";
+import {SmallTitleWindow} from "../../windows/SmallTitleWindow";
+import {BigButton} from "../../button/BigButton";
 const initialState = {
     username: '',
     surname: '',
@@ -18,7 +17,6 @@ const initialState = {
     error: '',
     isValid: true
 }
-
 function reducer(state, action) {
     switch (action.type) {
         case 'user':

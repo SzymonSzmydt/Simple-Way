@@ -1,11 +1,11 @@
-import "./css/generalDokuments.css";
-import {WindowContainer} from "../windows/WindowContainer";
+import "./css/recordDokuments.css";
+import {WindowContainer} from "../../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
 import { useEffect, useState } from 'react';
-import { totalMonth } from '../../redux/documentsSlice';
+import { totalMonth } from '../../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
-export const GeneralDocuments = () => {
+export const RecordDocuments = () => {
     const dispatch = useDispatch();
     const documents = useSelector(state => state.document.data);
     const keys = useSelector(state => state.document.keys);

@@ -2,7 +2,7 @@ import {useReducer} from "react";
 import "./css/loginWindow.css";
 import {useUserAuth} from "../../context/UserAuthContext";
 import { Link, useNavigate } from 'react-router-dom';
-import {BigButton} from "../button/BigButton";
+import {BigButton} from "../../components/button/BigButton";
 
 const initialState = {
     email: '',

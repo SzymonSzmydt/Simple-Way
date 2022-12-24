@@ -1,7 +1,7 @@
-import {SmallTitleWindow} from "../windows/SmallTitleWindow";
+import {SmallTitleWindow} from "../../windows/SmallTitleWindow";
 import { useSelector } from 'react-redux';
 
-export function GeneralInformation() {
+export function RecordInformation() {
     const month = useSelector(state => state.document.defaultMonth);
     const totalMonth = useSelector(state => state.document.totalMonth);
     const underLimit = totalMonth > 1505;
@@ -9,7 +9,6 @@ export function GeneralInformation() {
     const style = {
         backgroundColor: underLimit ? "#B07483" : "",
     }
-
     return (
         <SmallTitleWindow style={style} windowTitle={ underLimit ? "Przekroczono limit!" : "Przydatne informacje"} >
             <table className="general__information-table">

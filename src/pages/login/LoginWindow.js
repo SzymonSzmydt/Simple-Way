@@ -3,15 +3,12 @@ import {useReducer, useCallback} from "react";
 import GoogleButton from 'react-google-button';
 import {useUserAuth} from "../../context/UserAuthContext";
 import {useNavigate, Link} from 'react-router-dom';
-import {BigButton} from "../button/BigButton";
-
-
+import {BigButton} from "../../components/button/BigButton";
 const initialState = {
     email: '',
     password: '',
     error: '',
 }
-
 function loginReducer(state, action) {
     switch (action.type) {
         case 'field' : {
@@ -31,7 +28,6 @@ function loginReducer(state, action) {
         }
     }
 }
-
 export function LoginWindow() {
     const navigate = useNavigate();
     const [ state, dispatch ] = useReducer(loginReducer, initialState);
@@ -73,7 +69,6 @@ export function LoginWindow() {
     }, [handleGoogleClick, navigate]); 
 
     const showError = error ? <span> {error.split('Firebase:')} </span> : "Zaloguj się";
-
     return (
         <div className="login-window" >
             <div className="login-title" style={{backgroundColor: error ? "#B07483" : ""}}> { showError } </div>

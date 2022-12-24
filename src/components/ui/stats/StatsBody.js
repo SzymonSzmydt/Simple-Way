@@ -1,7 +1,5 @@
 import "./css/statsBody.css";
-
 export function StatsBody() {
-
     return (
         <div className="mainCompany statsBody">
             <div className="mainCompany__title"> Informacje </div>

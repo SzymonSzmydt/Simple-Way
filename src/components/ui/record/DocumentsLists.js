@@ -1,7 +1,7 @@
 import {doc, setDoc} from "firebase/firestore";
-import {db} from "../../context/firebase";
-import {useUserAuth} from "../../context/UserAuthContext";
-import { reduxData } from "./../../redux/documentsSlice";
+import {db} from "../../../context/firebase";
+import {useUserAuth} from "../../../context/UserAuthContext";
+import { reduxData } from "./../../../redux/documentsSlice";
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
