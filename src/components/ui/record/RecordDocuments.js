@@ -11,7 +11,7 @@ export const RecordDocuments = () => {
     const keys = useSelector(state => state.document.keys);
     const choiceMonth = useSelector(state => state.document.defaultMonth);
 
-    const isMonthInDocuments = choiceMonth ? keys.includes(choiceMonth) : 1;
+    const isMonthInDocuments = choiceMonth ? keys.includes(choiceMonth) : false;
     let total = 0;
     const documentsValues = documents[choiceMonth] ? Object.values( documents[choiceMonth]) : false;
 

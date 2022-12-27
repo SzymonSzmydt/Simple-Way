@@ -34,6 +34,7 @@
     font-size: 2.5rem;
     font-weight: 400;
     position: relative;
+    z-index: 0;
 }
 
 .home__intro-link {

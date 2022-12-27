@@ -14,6 +14,7 @@
 
     scroll-behavior: smooth;
     scrollbar-gutter: both-edges;
+    z-index: 1;
 }
 
 .logo {

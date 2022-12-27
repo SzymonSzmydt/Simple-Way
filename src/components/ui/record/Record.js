@@ -13,9 +13,9 @@ export function Record() {
             : <RecordHeader setAddProductButton={setAddProductButton} />;
     return (
         <Window>
-            <BarChart/>
             { whenAddingNewProduct }
             <RecordDocuments />
+            <BarChart/>
         </Window>
     )
 }
