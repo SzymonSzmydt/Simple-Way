@@ -6,7 +6,7 @@ const initialState = {
   data: [],
   keys: [],
   month: monthsText,
-  defaultMonth: monthsText[monthDigit] ?? 1,
+  defaultMonth: monthsText[monthDigit],
   totalMonth: 0
 };
 export const dataSlice = createSlice({

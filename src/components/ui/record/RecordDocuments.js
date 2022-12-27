@@ -28,11 +28,7 @@ export const RecordDocuments = () => {
      
      useEffect(()=> {  
         dispatch(totalMonth(sumOfMonth));
-     // eslint-disable-next-line react-hooks/exhaustive-deps
-     }, [sumOfMonth]);
-
-     console.log('documents.incliudes', documents);
-     console.log('documentsValues ', documentsValues);
+     }, [dispatch, sumOfMonth]);
 
     return (
         <WindowContainer>

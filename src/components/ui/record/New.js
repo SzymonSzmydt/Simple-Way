@@ -34,22 +34,19 @@ export function New({ setAddProductButton }) {
     const dayAfter = dayBefore.charAt(0) === "0" ? dayBefore.slice(1) : dayBefore;
 
     const saveDataToFirestore = useCallback( async () => {
+        if (products.date.length === 10 && products.sum > 0) {
+            setIsValid(true);
             try {
                 const docRef = await doc(db, user.email, year);
                 setDoc(docRef, { [selectedMonth] : { [dayAfter] : products } }, {merge: true} );
-                setAddProductButton(false);
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
+        }
+        else return setIsValid(false);
+        setAddProductButton(false);
     }, [products, dayAfter, selectedMonth, setAddProductButton, user.email]);
 
-    const saveRecords = useCallback( () => {  
-        if (products.date.length === 10 && products.sum > 0) {
-            setIsValid(true);
-            saveDataToFirestore();
-        }
-        else return setIsValid(false)
-    }, [products, saveDataToFirestore]);
     return (
         <WindowContainer>
             <SmallTitleWindow style={style} windowTitle={ isValid ? "Nowy wpis rejestru sprzedaży" : "Pola niekompletne lub mają nieprawdłowe wartości" }>
@@ -65,7 +62,7 @@ export function New({ setAddProductButton }) {
                         </label>
                     </form>
                     <div className="bottom-margin">
-                        <SmallButton name={"Zapisz"} onClick={saveRecords}/>
+                        <SmallButton name={"Zapisz"} onClick={saveDataToFirestore}/>
                         <SmallButton name={"Anuluj"} onClick={ ()=> setAddProductButton(false) }/>
                     </div>
                 </div>
