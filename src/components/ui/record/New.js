@@ -6,21 +6,14 @@ import {WindowContainer} from "../../windows/WindowContainer";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "../../../context/firebase";
 import {useUserAuth} from "../../../context/UserAuthContext";
-import { reduxData } from './../../../redux/documentsSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const year = new Date().getFullYear().toLocaleString();
 
 export function New({ setAddProductButton }) {
     const { user } = useUserAuth();
-    const dispatch = useDispatch();
-
     const monthsText = useSelector(state => state.document.month);
-    const documents = useSelector(state => state.document.data);
-
-    const [ products, setProducts ] = useState({date: '', sum: ''});
-    const [ data, setData ] = useState(documents);
-
+    const [ products, setProducts ] = useState({date: '', sum: 0});
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
     const selectedMonth = monthsText[monthDigit - 1];
 
@@ -48,19 +41,15 @@ export function New({ setAddProductButton }) {
             } catch (e) {
                 console.error("Error adding document: ", e);
             }
-    }, [products, dayAfter, selectedMonth, setAddProductButton, user.email, year]);
+    }, [products, dayAfter, selectedMonth, setAddProductButton, user.email]);
+
     const saveRecords = useCallback( () => {  
-        if (products.date.length === 10 && products.sum.length > 0) {
+        if (products.date.length === 10 && products.sum > 0) {
             setIsValid(true);
-            setData( {...data, 
-                    [selectedMonth] : {
-                        [dayAfter] : {
-                            date: products.date, sum: products.sum
-                        }}});
             saveDataToFirestore();
         }
         else return setIsValid(false)
-    }, [products, selectedMonth, dayAfter, dispatch, saveDataToFirestore, data]);
+    }, [products, saveDataToFirestore]);
     return (
         <WindowContainer>
             <SmallTitleWindow style={style} windowTitle={ isValid ? "Nowy wpis rejestru sprzedaży" : "Pola niekompletne lub mają nieprawdłowe wartości" }>

@@ -1,7 +1,7 @@
 import "./css/recordDokuments.css";
 import {WindowContainer} from "../../windows/WindowContainer";
 import {DocumentsLists} from "./DocumentsLists";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { totalMonth } from '../../../redux/documentsSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,9 +11,9 @@ export const RecordDocuments = () => {
     const keys = useSelector(state => state.document.keys);
     const choiceMonth = useSelector(state => state.document.defaultMonth);
 
-    const isMonthInDocuments = keys.includes(choiceMonth);
+    const isMonthInDocuments = choiceMonth ? keys.includes(choiceMonth) : 1;
     let total = 0;
-    const [ documentsValues ] = useState( Object.values( documents[choiceMonth]) );
+    const documentsValues = documents[choiceMonth] ? Object.values( documents[choiceMonth]) : false;
 
     const data = documentsValues ? documentsValues.map( ( {date, sum}, index ) =>
             <DocumentsLists 
@@ -30,6 +30,9 @@ export const RecordDocuments = () => {
         dispatch(totalMonth(sumOfMonth));
      // eslint-disable-next-line react-hooks/exhaustive-deps
      }, [sumOfMonth]);
+
+     console.log('documents.incliudes', documents);
+     console.log('documentsValues ', documentsValues);
 
     return (
         <WindowContainer>

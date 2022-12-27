@@ -2,15 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const monthsText = ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec", "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
 const monthDigit = new Date().getMonth().toLocaleString();
-
 const initialState = {
   data: [],
   keys: [],
   month: monthsText,
-  defaultMonth: monthsText[monthDigit],
+  defaultMonth: monthsText[monthDigit] ?? 1,
   totalMonth: 0
 };
-
 export const dataSlice = createSlice({
   name: 'document',
   initialState,
@@ -29,6 +27,5 @@ export const dataSlice = createSlice({
     }
   }
 });
-
 export const { reduxData, reduxKeys, choiceMonth, totalMonth } = dataSlice.actions;
 export default dataSlice.reducer;
