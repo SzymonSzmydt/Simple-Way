@@ -6,7 +6,8 @@ import {WindowContainer} from "../../windows/WindowContainer";
 import {doc, setDoc} from "firebase/firestore";
 import {db} from "../../../context/firebase";
 import {useUserAuth} from "../../../context/UserAuthContext";
-import { useSelector } from 'react-redux';
+import { reduxData } from '../../../redux/documentsSlice';
+import { useSelector, useDispatch } from 'react-redux';
 
 const year = new Date().getFullYear().toLocaleString();
 
@@ -16,6 +17,11 @@ export function New({ setAddProductButton }) {
     const [ products, setProducts ] = useState({date: '', sum: 0});
     const monthDigit = products.date.charAt(5) === 0 ? products.date.slice(6, 7) : products.date.slice(5, 7);
     const selectedMonth = monthsText[monthDigit - 1];
+
+    const reduxDataObject = useSelector(state => state.document.data);
+    const documents = JSON.parse(JSON.stringify(reduxDataObject));
+
+    const dispatch = useDispatch();
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -37,6 +43,8 @@ export function New({ setAddProductButton }) {
         if (products.date.length === 10 && products.sum > 0) {
             setIsValid(true);
             try {
+                documents[selectedMonth][dayAfter] = products;
+                dispatch(reduxData(documents));
                 const docRef = await doc(db, user.email, year);
                 setDoc(docRef, { [selectedMonth] : { [dayAfter] : products } }, {merge: true} );
             } catch (e) {
@@ -45,7 +53,7 @@ export function New({ setAddProductButton }) {
         }
         else return setIsValid(false);
         setAddProductButton(false);
-    }, [products, dayAfter, selectedMonth, setAddProductButton, user.email]);
+    }, [products, setAddProductButton, documents, selectedMonth, dayAfter, dispatch, user.email]);
 
     return (
         <WindowContainer>
