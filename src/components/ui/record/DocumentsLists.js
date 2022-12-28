@@ -22,8 +22,9 @@ export function DocumentsLists({ date, sum, index, choiceMonth, total }) {
     }, [documents, user.email]);
 
     const handleDeleteClick = useCallback((item) => {
-        if (documents[choiceMonth][item]) {
-            delete documents[choiceMonth][item];
+        const num = item[0] === '0' ? item[1] : item;
+        if (documents[choiceMonth][num]) {
+            delete documents[choiceMonth][num];
             dispatch(reduxData(documents));
             saveDataToFirestore();
         }
