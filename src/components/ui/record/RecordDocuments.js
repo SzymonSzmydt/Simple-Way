@@ -24,7 +24,7 @@ export const RecordDocuments = () => {
                 index={index}
                 choiceMonth={choiceMonth} 
      />) : null;
-     const sumOfMonth = isMonthInDocuments ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
+     const sumOfMonth = isMonthInDocuments && documentsValues ? documentsValues.reduce( (a, b) =>  parseFloat(a) + parseFloat(b.sum), 0 ) : 0;
      
      useEffect(()=> {  
         dispatch(totalMonth(sumOfMonth));
