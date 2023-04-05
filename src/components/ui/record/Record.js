@@ -4,18 +4,21 @@ import { Window } from "../../windows/Window";
 import { RecordHeader } from "./RecordHeader";
 import { RecordDocuments } from "./RecordDocuments";
 import { New } from "./New";
-import { BarChart } from '../../charts/BarChart';
-export function Record() {
-    const [ addProductButton, setAddProductButton ] = useState(false);
-    const whenAddingNewProduct =
-        addProductButton ?
-            <New setAddProductButton={setAddProductButton}/>
-            : <RecordHeader setAddProductButton={setAddProductButton} />;
-    return (
-        <Window>
-            { whenAddingNewProduct }
-            <RecordDocuments />
-            <BarChart/>
-        </Window>
-    )
+export function Record({ setDocuments, documents }) {
+  const [addProductButton, setAddProductButton] = useState(false);
+  const whenAddingNewProduct = addProductButton ? (
+    <New
+      setAddProductButton={setAddProductButton}
+      setDocuments={setDocuments}
+      documents={documents}
+    />
+  ) : (
+    <RecordHeader setAddProductButton={setAddProductButton} />
+  );
+  return (
+    <Window>
+      {whenAddingNewProduct}
+      <RecordDocuments setDocuments={setDocuments} documents={documents} />
+    </Window>
+  );
 }
