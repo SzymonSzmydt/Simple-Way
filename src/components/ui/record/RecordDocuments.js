@@ -10,11 +10,13 @@ export const RecordDocuments = ({ setDocuments, documents }) => {
   const keys = useSelector((state) => state.document.keys);
   const choiceMonth = useSelector((state) => state.document.defaultMonth);
 
-  const documentsValues = documents[0][choiceMonth]
-    ? Object.values(documents[0][choiceMonth])
-    : false;
+  const documentsValues =
+    documents.length > 0 && documents[0][choiceMonth]
+      ? Object.values(documents[0][choiceMonth])
+      : false;
 
-  const isMonthInDocuments = choiceMonth ? keys.includes(choiceMonth) : false;
+  const isMonthInDocuments =
+    documents.length > 0 && choiceMonth ? keys.includes(choiceMonth) : false;
   let total = 0;
 
   const data = documentsValues
@@ -32,7 +34,7 @@ export const RecordDocuments = ({ setDocuments, documents }) => {
       ))
     : null;
   const sumOfMonth =
-    isMonthInDocuments && documents
+    isMonthInDocuments && documentsValues
       ? documentsValues.reduce((a, b) => parseFloat(a) + parseFloat(b.sum), 0)
       : 0;
 

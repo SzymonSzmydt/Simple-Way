@@ -34,7 +34,7 @@ export function RecordInformation() {
               className='text__align-right'
               style={{ color: underLimit ? "#B07483" : "" }}
             >
-              {1505 - totalMonth.toFixed(2)} zł
+              {1745 - totalMonth.toFixed(2)} zł
             </th>
           </tr>
         </tbody>

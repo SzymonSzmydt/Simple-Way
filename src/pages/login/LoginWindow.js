@@ -93,8 +93,7 @@ export function LoginWindow() {
         className='login-title'
         style={{ backgroundColor: error ? "#B07483" : "" }}
       >
-        {" "}
-        {showError}{" "}
+        {showError}
       </div>
       <form className='form' onSubmit={handleSubmit}>
         <label htmlFor='email'> Email </label>
